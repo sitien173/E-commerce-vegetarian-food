@@ -19,11 +19,14 @@ public class UserMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         User user = new User();
+        user.setName(rs.getString("name"));
         user.setUsername(rs.getString("username"));
         user.setAddress(addressDao.getAddressByUsername(user.getUsername()));
         user.setEmail(rs.getString("email"));
         user.setPhone(rs.getString("phone"));
+        user.setAvatar(rs.getString("avatar"));
         user.setPassword(rs.getString("password"));
+        user.setCreatedAt(rs.getDate("created_at"));
         user.setEnable(rs.getBoolean("isEnable"));
         user.setGrantedAuthorities(userDao.getAuthorizesByUserName(user.getUsername()));
         return user;

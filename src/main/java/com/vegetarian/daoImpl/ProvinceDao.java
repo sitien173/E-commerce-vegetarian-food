@@ -23,7 +23,7 @@ public class ProvinceDao{
 
     /* ---------------------------  Get Province By Province ID ---------------------------------------*/
     public Province getProvince(int id){
-        String query = "select * from dbo.[province] where province_id = ?";
-        return jdbcTemplate.queryForObject(query,new Object[]{id},provinceMapper);
+        String SQL = "select * from dbo.[province] where province_id = ?";
+        return jdbcTemplate.queryForObject(SQL,new Object[]{id},provinceMapper);
     }
 }

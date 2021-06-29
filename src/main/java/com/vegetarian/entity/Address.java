@@ -8,7 +8,7 @@ public class Address implements Serializable {
     private Ward Ward;
 
 
-    public Address(String addr, Ward ward) {
+    public Address(String addr,Ward ward) {
         this.addr = addr;
         Ward = ward;
     }

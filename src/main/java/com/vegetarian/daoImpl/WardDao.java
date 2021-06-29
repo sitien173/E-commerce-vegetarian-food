@@ -28,6 +28,12 @@ public class WardDao{
         return jdbcTemplate.query(SQL,new Object[]{districtId},wardMapper);
     }
 
+    /* ---------------------------  Get All Ward By Province ID ---------------------------------------*/
+    public List<Ward> getAllWardByProvinceId(int provinceId){
+        String SQL = "select  * from [ward] where province_id = ?";
+        return jdbcTemplate.query(SQL,new Object[]{provinceId},wardMapper);
+    }
+
     /* ---------------------------  Get All Ward ---------------------------------------*/
 
     public List<Ward> getAllWard(){

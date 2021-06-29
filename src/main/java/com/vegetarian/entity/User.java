@@ -1,33 +1,73 @@
 package com.vegetarian.entity;
 
-import org.springframework.security.core.GrantedAuthority;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.util.Collection;
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
 public class User  implements Serializable, UserDetails {
+    @NotBlank(message = "name not null or empty")
+    private String name;
+    @NotBlank(message = "username not null or empty")
     private String username;
+    @NotBlank(message = "email not null or empty")
+    @Pattern(regexp = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$",message = "Incorrect email format")
     private String email;
+    @NotBlank(message = "password not null or empty")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" ,message = "Password must include uppercase and lowercase letters and up to 8 characters")
     private String password;
+    @Pattern(regexp = "\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})",message = "The phone number is not in the correct format")
     private String phone;
+    private String avatar;
     private List<Address> address;
+    private Date createdAt;
     private Set<SimpleGrantedAuthority> grantedAuthorities;
     private boolean isEnable;
 
     public User() {
     }
 
-    public User(String username, String password, Set<SimpleGrantedAuthority> grantedAuthorities, boolean isEnable) {
+    public User(String name, String username, String email, String password, String phone, String avatar, List<Address> address,Date createdAt, Set<SimpleGrantedAuthority> grantedAuthorities, boolean isEnable) {
+        this.name = name;
         this.username = username;
+        this.email = email;
         this.password = password;
+        this.phone = phone;
+        this.avatar = avatar;
+        this.address = address;
+        this.createdAt = createdAt;
         this.grantedAuthorities = grantedAuthorities;
         this.isEnable = isEnable;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     @Override
     public String getUsername() {
@@ -36,17 +76,17 @@ public class User  implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.vegetarian.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 
@@ -46,17 +45,40 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int insertUser(User user) {
-        String SQL = "insert into [appUser](username,password,email,phone,isEnable) " +
-                     "values(?,?,?,?,?)";
+    public boolean insertUser(User user) {
+        String SQL = "insert into [appUser](username,password,name,avatar,email,phone) " +
+                     "values(?,?,?,?,?,?)";
         Object[] inputs = new Object[]{
                 user.getUsername(),
                 user.getPassword(),
+                user.getName(),
+                user.getAvatar(),
                 user.getEmail(),
                 user.getPhone(),
-                user.isEnabled()
         };
-        return jdbcTemplate.update(SQL,inputs);
+       return jdbcTemplate.update(SQL,inputs) > 0;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        String SQL = "UPDATE [appUser] set password=?," +
+                "name=?," +
+                "avatar=?," +
+                "email=?," +
+                "phone=?," +
+                "isEnable=?," +
+                "created_at=? where username = ?";
+        Object[] inputs = new  Object[]{
+                user.getPassword(),
+                user.getName(),
+                user.getAvatar(),
+                user.getEmail(),
+                user.getPhone(),
+                user.isEnabled(),
+                user.getCreatedAt(),
+                user.getUsername()
+        };
+        return jdbcTemplate.update(SQL,inputs) > 0;
     }
 
     @Override
