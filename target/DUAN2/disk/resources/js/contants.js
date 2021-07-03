@@ -1,0 +1,1 @@
+const URL = location.origin;

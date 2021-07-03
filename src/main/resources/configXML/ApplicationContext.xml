@@ -38,7 +38,6 @@
             </props>
         </property>
     </bean>
-
     <mvc:resources mapping="/disk/resources/**" location="/disk/resources/"/>
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

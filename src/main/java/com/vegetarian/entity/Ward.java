@@ -5,6 +5,9 @@
  */
 package com.vegetarian.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
@@ -13,6 +16,8 @@ import java.io.Serializable;
  */
 public class Ward implements Serializable {
     private static final long serialVersionUID = -5440372534300871944L;
+    @NotBlank
+    @Min(1)
     private int wardId;
     private String wardName;
     private String wardPrefix;

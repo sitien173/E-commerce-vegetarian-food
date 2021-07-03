@@ -1,6 +1,7 @@
 package com.vegetarian.mapper;
 
 
+import com.vegetarian.dao.UserDao;
 import com.vegetarian.entity.VerificationToken;
 import com.vegetarian.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.sql.Timestamp;
 @Component
 public class VerificationTokenMapper implements RowMapper<VerificationToken> {
     @Autowired
-    private UserService userService;
+    private UserDao userService;
     @Override
     public VerificationToken mapRow(ResultSet rs, int rowNum) throws SQLException {
         VerificationToken verificationToken = new VerificationToken();

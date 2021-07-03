@@ -1,7 +1,6 @@
-const URL = location.origin;
-const province = document.getElementById("province");
-const district = document.getElementById("district");
-const ward = document.getElementById("ward");
+const province = document.getElementById("address.ward.province.provinceId");
+const district = document.getElementById("address.ward.district.districtId");
+const ward = document.getElementById("address.ward.wardId");
 function status(response) {
     if (response.status >= 200 && response.status < 300) {
         return Promise.resolve(response)

@@ -18,19 +18,12 @@ import java.sql.SQLException;
 public class AddressMapper implements RowMapper<Address> {
     @Autowired
     private WardDao wardDao;
-    @Autowired
-    private ProvinceDao provinceDao;
-    @Autowired
-    private DistrictDao districtDao;
     @Override
     public Address mapRow(ResultSet rs, int rowNum) throws SQLException {
         Address address = new Address();
+        address.setId(rs.getInt("id"));
         Ward ward = wardDao.getWard(rs.getInt("ward_id"));
-        Province province = provinceDao.getProvince(rs.getInt("province_id"));
-        District district = districtDao.getDistrict(rs.getInt("district_id"));
         address.setWard(ward);
-        address.getWard().setProvince(province);
-        address.getWard().setDistrict(district);
         address.setAddr(rs.getString("addr"));
         return address;
     }

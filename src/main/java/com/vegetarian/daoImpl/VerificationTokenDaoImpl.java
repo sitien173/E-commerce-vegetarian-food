@@ -4,6 +4,7 @@ import com.vegetarian.dao.VerificationTokenDao;
 import com.vegetarian.entity.VerificationToken;
 import com.vegetarian.mapper.VerificationTokenMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,7 +32,12 @@ public class VerificationTokenDaoImpl implements VerificationTokenDao {
     @Override
     public VerificationToken getVerificationToken(String token) {
         String SQL = "select * from [verificationToken] where token = ?";
-        return jdbcTemplate.queryForObject(SQL,new Object[]{token},verificationTokenMapper);
+        try{
+            return jdbcTemplate.queryForObject(SQL,new Object[]{token},verificationTokenMapper);
+        }catch (EmptyResultDataAccessException e){
+            e.getMessage();
+        }
+        return null;
     }
 
     @Override

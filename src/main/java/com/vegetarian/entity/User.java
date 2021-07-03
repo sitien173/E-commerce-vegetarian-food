@@ -1,6 +1,4 @@
 package com.vegetarian.entity;
-
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +22,7 @@ public class User  implements Serializable, UserDetails {
     @Pattern(regexp = "\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})",message = "The phone number is not in the correct format")
     private String phone;
     private String avatar;
-    private List<Address> address;
+    private Address address;
     private Date createdAt;
     private Set<SimpleGrantedAuthority> grantedAuthorities;
     private boolean isEnable;
@@ -32,7 +30,7 @@ public class User  implements Serializable, UserDetails {
     public User() {
     }
 
-    public User(String name, String username, String email, String password, String phone, String avatar, List<Address> address,Date createdAt, Set<SimpleGrantedAuthority> grantedAuthorities, boolean isEnable) {
+    public User(String name, String username, String email, String password, String phone, String avatar, Address address,Date createdAt, Set<SimpleGrantedAuthority> grantedAuthorities, boolean isEnable) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -128,11 +126,11 @@ public class User  implements Serializable, UserDetails {
         this.phone = phone;
     }
 
-    public List<Address> getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(List<Address> address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

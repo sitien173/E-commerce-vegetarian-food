@@ -5,14 +5,8 @@
 <html>
 <head>
     <title>Đăng ký</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="sitien173">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/disk/resources/css/login.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <c:import url="../inc/head.jsp"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/disk/resources/css/login.css"/>
 </head>
 <body>
 <div class="container">
@@ -76,23 +70,29 @@
                     <div class="col-6 form-group">
                        <div class="row">
                            <div class="col-12">
-                               <label for="province">Province</label>
-                               <select class="form-control" required id="province">
-                               </select>
+                               <label for="address.ward.province.provinceId">Province</label>
+                               <form:select  path="address.ward.province.provinceId" class="form-control" required="required">
+                                   <form:option value="${user.address.ward.province.provinceId}"><c:out value="${user.address.ward.province.provinceName}"/></form:option>
+                               </form:select>
+                               <form:errors path="address.ward.province.provinceId"/>
                            </div>
                        </div>
                         <div class="row">
                             <div class="col-12">
-                                <label for="district">District</label>
-                                <select class="form-control" required id="district">
-                                </select>
+                                <label for="address.ward.district.districtId">District</label>
+                                <form:select path="address.ward.district.districtId" class="form-control" required="required">
+                                    <form:option value="${user.address.ward.district.districtId}"><c:out value="${user.address.ward.district.districtName}"/></form:option>
+                                </form:select>
+                                <form:errors path="address.ward.district.districtId"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label for="ward">Ward</label>
-                                <select class="form-control" required name="ward" id="ward">
-                                </select>
+                                <label for="address.ward.wardId">Ward</label>
+                                <form:select path="address.ward.wardId" class="form-control" required="required">
+                                    <form:option value="${user.address.ward.wardId}"><c:out value="${user.address.ward.wardName}"/></form:option>
+                                </form:select>
+                                <form:errors path="address.ward.wardId"/>
                             </div>
                         </div>
 
@@ -100,8 +100,9 @@
                     <div class="col-6 form-group">
                         <div class="row">
                             <div class="col-12">
-                                <label for="addr">Address</label>
-                                <input type="text" class="form-control" name="addr" placeholder="My Address" id="addr" required>
+                                <label for="address.addr">Address</label>
+                                <form:input path="address.addr" type="text" class="form-control" placeholder="My Address" required="required"/>
+                                <form:errors path="address.addr"/>
                             </div>
                         </div>
                         <div class="row">
@@ -115,15 +116,11 @@
             </div>
         </div>
         <hr>
-        <span class="text-muted text-danger"><c:out value="${param.messenger}"/></span>
         <%--        hidden data --%>
-        <form:button type="submit">Registration</form:button>
-        <a href="<c:url value="/user/login"/>" class="text-info" id="registration"><i class="fas fa-arrow-left"></i>Have a Account. Click to login </a>
+        <form:button type="submit" cssClass="btn btn-outline-success">Registration</form:button>
     </form:form>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/disk/resources/js/Address.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/disk/resources/js/Registration.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/fontawesome.min.js" integrity="sha512-KCwrxBJebca0PPOaHELfqGtqkUlFUCuqCnmtydvBSTnJrBirJ55hRG5xcP4R9Rdx9Fz9IF3Yw6Rx40uhuAHR8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/disk/resources/js/validForm.js"></script>
 </body>
 </html>

@@ -31,11 +31,16 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
         eventPublisher.publishEvent(event);
     }
 
+    @Override
+    public boolean deleteVerificationToken(int id, String username) {
+        return verificationTokenDao.deleteVerificationToken(id,username);
+    }
+
     @Transactional(rollbackFor = SQLException.class)
     @Override
     public boolean resendVerificationToken(VerificationToken verificationToken, OnRegistrationCompleteEvent event) {
         // delete verification token
-        if(verificationTokenDao.deleteVerificationToken(verificationToken.getId(),verificationToken.getUser().getUsername())){
+        if(this.deleteVerificationToken(verificationToken.getId(),verificationToken.getUser().getUsername())){
             eventPublisher.publishEvent(event);
         }else return false;
         return true;

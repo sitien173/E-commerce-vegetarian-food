@@ -16,13 +16,4 @@ public class LoginController {
         System.out.println(request.getContextPath());
         return "user/login";
     }
-
-    @PostMapping(value = {"/",""})
-    private String checkLogin(@RequestParam("username") String username,
-                              @RequestParam("password") String password){
-
-        return "user/login";
-    }
-
-
 }

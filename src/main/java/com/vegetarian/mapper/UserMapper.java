@@ -1,5 +1,7 @@
 package com.vegetarian.mapper;
 
+import com.vegetarian.dao.AddressDao;
+import com.vegetarian.dao.UserDao;
 import com.vegetarian.daoImpl.AddressDaoImpl;
 import com.vegetarian.daoImpl.UserDaoImpl;
 import com.vegetarian.entity.User;
@@ -13,9 +15,9 @@ import java.sql.SQLException;
 @Component
 public class UserMapper implements RowMapper<User> {
     @Autowired
-    private AddressDaoImpl addressDao;
+    private AddressDao addressDao;
     @Autowired
-    private UserDaoImpl userDao;
+    private UserDao userDao;
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         User user = new User();

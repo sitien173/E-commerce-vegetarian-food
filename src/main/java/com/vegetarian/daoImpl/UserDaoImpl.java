@@ -4,9 +4,11 @@ import com.vegetarian.dao.UserDao;
 import com.vegetarian.entity.User;
 import com.vegetarian.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -22,26 +24,43 @@ public class UserDaoImpl implements UserDao {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
     
     @Override
     public User getUserByEmailL(String email) {
         String SQL = "select * from [appUser] " +
                 "where appUser.email = ?";
-        return jdbcTemplate.queryForObject(SQL,new Object[]{email},userMapper);
+        try{
+            return jdbcTemplate.queryForObject(SQL,new Object[]{email},userMapper);
+        }catch (EmptyResultDataAccessException e){
+            e.getMessage();
+        }
+        return null;
     }
 
     @Override
     public User getUserByUserName(String username) {
         String SQL = "select * from [appUser] " +
                 "where appUser.username = ?";
-        return jdbcTemplate.queryForObject(SQL,new Object[]{username},userMapper);
+        try{
+            return jdbcTemplate.queryForObject(SQL,new Object[]{username},userMapper);
+        }catch (EmptyResultDataAccessException e){
+            e.getMessage();
+        }
+        return null;
     }
 
     @Override
     public User getUserByPhone(String phone) {
         String SQL = "select * from [appUser] " +
                 "where appUser.phone = ?";
-        return jdbcTemplate.queryForObject(SQL,new Object[]{phone},userMapper);
+       try{
+           return jdbcTemplate.queryForObject(SQL,new Object[]{phone},userMapper);
+       }catch (EmptyResultDataAccessException e){
+           e.getMessage();
+       }
+       return null;
     }
 
     @Override
@@ -50,7 +69,7 @@ public class UserDaoImpl implements UserDao {
                      "values(?,?,?,?,?,?)";
         Object[] inputs = new Object[]{
                 user.getUsername(),
-                user.getPassword(),
+                encoder.encode(user.getPassword()),
                 user.getName(),
                 user.getAvatar(),
                 user.getEmail(),
@@ -69,7 +88,7 @@ public class UserDaoImpl implements UserDao {
                 "isEnable=?," +
                 "created_at=? where username = ?";
         Object[] inputs = new  Object[]{
-                user.getPassword(),
+                encoder.encode(user.getPassword()),
                 user.getName(),
                 user.getAvatar(),
                 user.getEmail(),
@@ -79,6 +98,12 @@ public class UserDaoImpl implements UserDao {
                 user.getUsername()
         };
         return jdbcTemplate.update(SQL,inputs) > 0;
+    }
+
+    @Override
+    public boolean deleteUser(String username) {
+        String SQL = "delete from [appUser] where username = ?";
+        return jdbcTemplate.update(SQL,username) > 0;
     }
 
     @Override
@@ -106,5 +131,11 @@ public class UserDaoImpl implements UserDao {
             authorities.add(new SimpleGrantedAuthority(rs.getString("authority")));
         });
         return authorities;
+    }
+
+    @Override
+    public List<User> getAllUser() throws EmptyResultDataAccessException {
+        String SQL = "select * from [appUser]";
+        return jdbcTemplate.query(SQL,userMapper);
     }
 }
