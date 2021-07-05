@@ -31,6 +31,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getAllProductHighlight() {
+        return productDao.getAllProductHighlight();
+    }
+
+    @Override
+    public List<Product> getAllProductBestSeller() {
+        return productDao.getAllProductBestSeller();
+    }
+
+    @Override
+    public List<Product> getAllProductByCategory(int cateID) {
+        return productDao.getAllProduct(cateID);
+    }
+
+    @Override
     public Product getProduct(int id) {
         return productDao.getProduct(id);
     }

@@ -29,7 +29,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
             </fieldset>
-            <a id="forgotPassword" class="text-info" href="<c:url value="/user/registration/"/>">Forgot your password?</a>
+            <a id="forgotPassword" class="text-info" href="<c:url value="/user/forgotPassword/"/>">Forgot your password?</a>
             <button type="submit" class="btn btn-primary">Login</button>
             <a style="position: absolute;right: 0;bottom: 0" href="<c:url value="/user/registration/"/>" class="text-info" id="registration">Create Account <i class="fas fa-arrow-right"></i></a>
 

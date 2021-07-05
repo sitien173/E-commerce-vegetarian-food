@@ -78,4 +78,17 @@ public class Feedback {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "id=" + id +
+                ", user=" + user +
+                ", product=" + product +
+                ", createdAt=" + createdAt +
+                ", rated=" + rated +
+                ", status=" + status +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }

@@ -7,6 +7,9 @@ import java.util.List;
 public interface ProductService {
     void insert(Product product);
     List<Product> getAllProduct(int cateId);
+    List<Product> getAllProductHighlight();
+    List<Product> getAllProductBestSeller();
+    List<Product> getAllProductByCategory(int cateID);
     Product getProduct(int id);
     boolean update(Product product);
     boolean delete(int id);

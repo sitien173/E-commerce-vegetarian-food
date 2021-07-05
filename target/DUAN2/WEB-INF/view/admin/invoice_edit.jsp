@@ -1,22 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fom" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${sessionScope.admin ne true}">
-    <c:set var="ad" value="${sessionScope.logged}"/>
-    <c:remove var="logged" scope="session"/>
-    <c:remove var="admin" scope="session"/>
-    <script>location.href = '${pageContext.request.contextPath}/user/sign_in'</script>
-</c:if>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Admin</title>
     <c:import url="../inc/head.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+    <link rel="stylesheet" href="<c:url value="/disk/resources/css/style.css"/>"/>
 </head>
 <body>
-<c:set var="url" value="${pageContext.request.contextPath}"/>
 <div class="container-scroller">
     <%--    Navbar --%>
     <c:import url="../inc/nav_admin.jsp"/>
@@ -29,9 +21,11 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Registration</h4>
-                            <form:form method="post" modelAttribute="order"
-                                       action="${pageContext.request.contextPath}/admin/order/update" class="form-sample">
+                            <c:url var="action" value="/admin/invoice/update"/>
+                            <form:form method="post" modelAttribute="invoice"
+                                       action="${action}" class="form-sample">
                                 <p class="card-description"> Order Edit </p>
+                                <p class="text-info"><c:out value="${info}"/></p>
                                 <div class="row">
                                     <form:hidden path="id"/>
                                     <div class="col-md-6">
@@ -45,11 +39,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label">Created End</label>
-                                            <div class="col-sm-9">
-                                                <form:input path="createdEnd" cssClass="form-control"/>
-                                                <form:errors path="createdEnd" cssClass="error"/>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +98,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group row">
-                                                                        <form:hidden path="user.userId"/>
+                                                                        <form:hidden path="user.username"/>
                                                                         <label class="col-sm-3 col-form-label">Họ và tên</label>
                                                                         <div class="col-sm-9">
                                                                             <form:input path="user.name" disabled="true" cssStyle="background-color: #4e555b" class="form-control" />
@@ -123,7 +112,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-sm-3 col-form-label">Địa chỉ</label>
                                                                         <div class="col-sm-9">
-                                                                            <form:textarea path="user.addr.addr" cssStyle="background-color: #4e555b" cssClass="form-control" disabled="true"/>
+                                                                            <form:textarea path="user.address.addr" cssStyle="background-color: #4e555b" cssClass="form-control" disabled="true"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -149,21 +138,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Khách hàng</label>
-                                                                        <div class="col-sm-3">
-                                                                            <c:if test="${order.user.isAdmin eq 0}">
-                                                                                <div class="badge badge-outline-primary">Người dùng</div>
-                                                                            </c:if>
-                                                                            <c:if test="${order.user.isAdmin eq 1}">
-                                                                                <div class="badge badge-outline-primary">Admin</div>
-                                                                            </c:if>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,7 +154,7 @@
                                                     <h4 class="card-title text-center">List Item</h4>
                                                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                                                         <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                                            <table class="table table-borderless table-responsive">
+                                                            <table class="table table-borderless table-responsive-sm">
                                                                 <thead>
                                                                 <tr>
                                                                     <th class="text-info">STT</th>
@@ -192,28 +166,17 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <c:set var="tempTotal" value="0"/>
-                                                                <c:set var="total" value="0"/>
-                                                                <c:forEach varStatus="i" var="item" items="${order.items}">
-                                                                    <div hidden>
-                                                                        <c:if test="${item.product.salePrice > 0}">
-                                                                            <c:out value="${tempTotal = item.quantity*item.product.salePrice}"/>
-                                                                        </c:if>
-                                                                        <c:if test="${item.product.salePrice eq 0}">
-                                                                            <c:out value="${tempTotal = item.quantity*item.product.price}"/>
-                                                                        </c:if>
-                                                                        <c:out value="${total = total + tempTotal}"/>
-                                                                    </div>
+                                                                <c:forEach varStatus="i" var="item" items="${invoice.items}">
                                                                     <tr>
                                                                         <td>${i.index}</td>
                                                                         <td>
-                                                                            <img src="${url}${item.product.image}" width="30px" height="30px" alt="thumbnail">
-                                                                              ${item.product.name}
+                                                                            <img src="<c:url value="${item.product.images[0].location}"/> " class="img-xs rounded-circle" alt="thumbnail">
+                                                                                ${item.product.name}
                                                                         </td>
                                                                         <td><script>document.write(formatMoney(${item.product.price}))</script></td>
                                                                         <td><script>document.write(formatMoney(${item.product.salePrice}))</script></td>
                                                                         <td>${item.quantity}</td>
-                                                                        <td><script>document.write(formatMoney(${tempTotal}))</script></td>
+                                                                        <td><script>document.write(formatMoney(${item.subTotal}))</script></td>
                                                                     </tr>
                                                                 </c:forEach>
                                                                 <tr>
@@ -222,7 +185,7 @@
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td></td>
-                                                                    <td><script>document.write(formatMoney(${total}))</script></td>
+                                                                    <td><script>document.write(formatMoney(${invoice.total}))</script></td>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>

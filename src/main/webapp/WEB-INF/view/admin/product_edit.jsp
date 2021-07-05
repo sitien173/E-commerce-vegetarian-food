@@ -26,7 +26,7 @@
                             <c:out value="${info}"/>
                             <c:url value="/admin/product/edit" var="action"/>
                             <form:form method="post" modelAttribute="product" enctype="multipart/form-data"
-                                       action="${pageContext.request.contextPath}/admin/product/update" class="form-sample">
+                                       action="${action}" class="form-sample">
                                 <p class="card-description"> Product info </p>
                                 <div class="row">
                                     <form:hidden path="id"/>

@@ -1,4 +1,4 @@
-package com.vegetarian.api;
+package com.vegetarian.api.home;
 
 import com.vegetarian.entity.District;
 import com.vegetarian.entity.Province;

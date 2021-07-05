@@ -17,7 +17,7 @@ function del(categoryId) {
         method: "DELETE",
     }).then(status)
         .then(() => {
-            alert("delete success");
+            showPopup("success","Delete Item","Thành công");
             table.row($('button#'+categoryId+'').parents('tr')).remove().draw();
         })
         .catch((err) => console.log(err))

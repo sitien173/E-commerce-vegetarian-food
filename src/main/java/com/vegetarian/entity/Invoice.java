@@ -1,6 +1,9 @@
 package com.vegetarian.entity;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Invoice {
     private int id;
@@ -11,11 +14,12 @@ public class Invoice {
     private String payMethod;
     private Double subTotal;
     private Double total;
+    private List<Item> items = new ArrayList<>();
 
     public Invoice() {
     }
 
-    public Invoice(User user, LocalDateTime createdAt, String description, int status, String payMethod, Double subTotal, Double total) {
+    public Invoice(User user, LocalDateTime createdAt, String description, int status, String payMethod, Double subTotal, Double total, List<Item> items) {
         this.user = user;
         this.createdAt = createdAt;
         this.description = description;
@@ -23,6 +27,7 @@ public class Invoice {
         this.payMethod = payMethod;
         this.subTotal = subTotal;
         this.total = total;
+        this.items = items;
     }
 
     public int getId() {
@@ -87,5 +92,28 @@ public class Invoice {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "id=" + id +
+                ", user=" + user +
+                ", createdAt=" + createdAt +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", payMethod='" + payMethod + '\'' +
+                ", subTotal=" + subTotal +
+                ", total=" + total +
+                ", items=" + items +
+                '}';
     }
 }

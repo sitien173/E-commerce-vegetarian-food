@@ -1,9 +1,8 @@
 package com.vegetarian.entity;
 
 public class Item {
-    private int id;
-    private int quantity;
     private Product product;
+    private int quantity;
     private Double subTotal;
 
     public Item() {
@@ -15,13 +14,7 @@ public class Item {
         this.subTotal = subTotal;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getQuantity() {
         return quantity;

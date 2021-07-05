@@ -135,6 +135,15 @@ body, ul, li, p, a, label, input, div {
   width: 6px;
   height: 6px;
 }
+.heading-section {
+  text-transform: uppercase;
+  color: #ac3a42;
+  margin: 20px;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
 
 @media (min-width: 576px) {
   .tempaltemo-carousel .h1 { font-size: 1em !important;}
