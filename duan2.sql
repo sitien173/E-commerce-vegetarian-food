@@ -204,6 +204,7 @@ GO
 ALTER TABLE duan2.dbo.item
 ADD CONSTRAINT FK_item_product FOREIGN KEY (product_id) REFERENCES dbo.product (id) ON DELETE CASCADE ON UPDATE CASCADE
 GO
+
 SET IDENTITY_INSERT duan2.dbo.address ON
 GO
 INSERT duan2.dbo.address(id, username, ward_id, addr) VALUES (2, N'sitien173', 276, N'97 Man Thien')
@@ -228,6 +229,9 @@ SET IDENTITY_INSERT duan2.dbo.categories ON
 GO
 INSERT duan2.dbo.categories(id, name, slug) VALUES (1, N'SẢN PHẨM KHÔ', 'san-pham-kho')
 INSERT duan2.dbo.categories(id, name, slug) VALUES (2, N'ĐỒ CHAY ĐÔNG LẠNH', 'do-chay-dong-lanh')
+INSERT duan2.dbo.categories(id, name, slug) VALUES (5, N'GIA VỊ CHAY', 'gia-vi-chay')
+INSERT duan2.dbo.categories(id, name, slug) VALUES (6, N'HẠT DINH DƯỠNG & NGŨ CỐC', 'hat-dinh-duong-va-ngu-coc')
+INSERT duan2.dbo.categories(id, name, slug) VALUES (7, N'THỰC PHẨM CHAY ĂN LIỀN', 'chay-an-lien')
 GO
 SET IDENTITY_INSERT duan2.dbo.categories OFF
 GO
@@ -949,7 +953,6 @@ GO
 
 SET IDENTITY_INSERT duan2.dbo.feedback ON
 GO
-INSERT duan2.dbo.feedback(id, username, product_id, created_at, rated, status, comment) VALUES (8, N'sitien', 2, '2021-07-06 14:48:13.220', 4, 1, N'sản phẩm ok')
 GO
 SET IDENTITY_INSERT duan2.dbo.feedback OFF
 GO
@@ -957,11 +960,33 @@ GO
 SET IDENTITY_INSERT duan2.dbo.image ON
 GO
 INSERT duan2.dbo.image(id, product_id, location) VALUES (1, 1, N'/disk/resources/img/upload/64383130468671840605554960119336062681088n-4932.jpg')
-INSERT duan2.dbo.image(id, product_id, location) VALUES (2, 2, N'/disk/resources/img/upload/ao-polo-nam-APS018S1-02x650x650x4.jpg')
-INSERT duan2.dbo.image(id, product_id, location) VALUES (3, 3, N'/disk/resources/img/upload/c87cd6d44d9c478155aa7b44b81f9c60.jpg')
-INSERT duan2.dbo.image(id, product_id, location) VALUES (4, 3, N'/disk/resources/img/upload/a27aab65d172e22e83989792fa63e933.jpg')
-INSERT duan2.dbo.image(id, product_id, location) VALUES (5, 3, N'/disk/resources/img/upload/f37677fa9b1e20242fb64bd274b5af87.png')
-INSERT duan2.dbo.image(id, product_id, location) VALUES (6, 3, N'/disk/resources/img/upload/37840a42858716654f4da9ae0945c557.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (12, 5, N'/disk/resources/img/upload/z2523323710437_e9d584b42b993014369f9b8b36d94729-1000x1000.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (13, 5, N'/disk/resources/img/upload/z2523323710440_a6d33a1558522f49909fd525e72f3f2a-1000x1000.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (14, 6, N'/disk/resources/img/upload/00a-1.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (15, 6, N'/disk/resources/img/upload/00c-1.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (16, 7, N'/disk/resources/img/upload/z2094123752933_b214c29f787f4e086dad6c5a5063c36a.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (17, 7, N'/disk/resources/img/upload/z2094123756420_be16c6005707af816b8dae6529b1e52b.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (18, 7, N'/disk/resources/img/upload/z2094123768637_8fa4918dfada72c0d2d186f9b136a26b (1).jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (19, 7, N'/disk/resources/img/upload/z2094123768637_8fa4918dfada72c0d2d186f9b136a26b.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (20, 8, N'/disk/resources/img/upload/00fa.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (21, 8, N'/disk/resources/img/upload/02-27.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (22, 9, N'/disk/resources/img/upload/00-Copy-1.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (23, 9, N'/disk/resources/img/upload/02-95.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (24, 10, N'/disk/resources/img/upload/02-27.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (25, 10, N'/disk/resources/img/upload/367A2341.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (26, 11, N'/disk/resources/img/upload/00-52-scaled.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (27, 11, N'/disk/resources/img/upload/02-17.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (28, 12, N'/disk/resources/img/upload/00-14.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (29, 12, N'/disk/resources/img/upload/02-14.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (30, 12, N'/disk/resources/img/upload/03-16.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (31, 13, N'/disk/resources/img/upload/00-27-300x300.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (32, 13, N'/disk/resources/img/upload/02-22-300x300.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (33, 13, N'/disk/resources/img/upload/03-23.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (34, 14, N'/disk/resources/img/upload/00-16.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (35, 14, N'/disk/resources/img/upload/02-16-1000x1000.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (36, 15, N'/disk/resources/img/upload/00-17.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (37, 15, N'/disk/resources/img/upload/02-16.jpg')
+INSERT duan2.dbo.image(id, product_id, location) VALUES (38, 15, N'/disk/resources/img/upload/03-13.jpg')
 GO
 SET IDENTITY_INSERT duan2.dbo.image OFF
 GO
@@ -979,8 +1004,21 @@ INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_i
 Khối lượng tịnh:500gr/1 gói.
 Không chất bảo quản, để đông lạnh -18•C hạn sử dụng 1 năm.
 Có giá ưu đãi cho khách mua số lượng.', CONVERT(bit, 'True'))
-INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (2, N'test', 5, 95, 40000, 20000, 1, N'test', CONVERT(bit, 'True'))
-INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (3, N'Sườn non chay Khánh An', 6, 94, 16000, 0, 1, N'Sườn non chay Khánh An 100g. Hàng chính hãng, sản xuất tại Việt Nam, nguyên liệu đảm bảo an toàn, không sử dụng chất biến đổi gen và chất bảo quản. Hàm lượng Protein cao', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (5, N'Tương Kho Quẹt Loại 200g', 0, 100, 15000, 0, 5, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (6, N'Óc Chó Đã Tách Vỏ (500g)', 0, 1000, 130000, 0, 6, N'Thành phần: 100% hạt óc chó tách vỏ hàng Mỹ loại 1, đóng gói mỗi bịch 500g. TiBi Shop chuyên cung cấp hạt óc chó tách vỏ sẵn rất tiện lợi, chỉ cần mua về và sử dụng ngay. Miễn phí giao hàng khi mua từ 500g.', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (7, N'Hạnh Nhân Tách Vỏ – Gói 500g, Loại Sống | Sấy Chín', 0, 1000, 160000, 0, 6, N' Thành phần: Hạnh nhân tách vỏ lụa chưa sấy | sấy chín.
+
+ Cách dùng: Ăn trực tiếp; dùng làm sữa hạt, làm bánh; xay rắc lên salad, v.v.
+
+ Định lượng: Gói 500g.', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (8, N'Đậu Hà Lan (500g)', 0, 1000, 25000, 0, 6, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (9, N'Sườn Cốt Lết Nướng Chay Âu Lạc, Gói 1kg', 0, 1000, 200000, 150000, 2, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (10, N'Giò Tôm Chay Thanh Ái, Loại 500g', 0, 100, 15000, 0, 2, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (11, N'Chà Là Quả Rời Loại Hộp (500g)', 0, 100, 45000, 39000, 7, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (12, N'Hạt Thông Loại (500g)', 0, 100, 190000, 180000, 7, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (13, N'Chà Bông Sợi Chay Loại 500g', 0, 100, 150000, 140000, 7, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (14, N'Tương Ớt Da Sa', 0, 100, 15000, 13000, 5, N'', CONVERT(bit, 'True'))
+INSERT duan2.dbo.product(id, name, sold, quantity, price, sale_price, category_id, description, highlight) VALUES (15, N'Chao Đậu Nành', 0, 100, 20000, 0, 5, N'', CONVERT(bit, 'True'))
 GO
 SET IDENTITY_INSERT duan2.dbo.product OFF
 GO
