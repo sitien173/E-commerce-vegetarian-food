@@ -1,12 +1,9 @@
 package com.vegetarian.controller.user;
 
-import com.vegetarian.entity.Address;
 import com.vegetarian.entity.User;
 import com.vegetarian.entity.VerificationToken;
-import com.vegetarian.entity.Ward;
 import com.vegetarian.service.UserService;
 import com.vegetarian.service.VerificationTokenService;
-import com.vegetarian.service.WardService;
 import com.vegetarian.serviceImpl.FileService;
 import com.vegetarian.ultil.OnRegistrationCompleteEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -84,10 +80,8 @@ public class RegistrationController {
        if(verificationToken != null){
            verificationTokenService.deleteVerificationToken(verificationToken.getId(),verificationToken.getUser().getUsername());
            User user = verificationToken.getUser();
-           LocalDateTime localDateTime = LocalDateTime.now();
-           if (!verificationToken.getExpiryDate().isBefore(localDateTime)) {
+           if (!verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
                model.addAttribute("messenger","token has expired");
-               model.addAttribute("requestToken","/user/registration/resendRegistrationConfirm");
                return "user/wait-confirm-token";
            }
            user.setEnable(true);
@@ -98,23 +92,4 @@ public class RegistrationController {
        }
         return "user/wait-confirm-token";
     }
-
-    @GetMapping("/resendRegistrationConfirm")
-    public String resendRegistration(Model model,@RequestParam(value = "token",required = false) String token,HttpServletRequest request){
-        VerificationToken verificationToken = verificationTokenService.getVerificationToken(token);
-        if(token != null){
-            String appUrl = this.getAppUrl(request);
-            String redirectLink = "/user/registration/accessToken";
-            OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(verificationToken.getUser(), appUrl,redirectLink);
-           if(verificationTokenService.resendVerificationToken(verificationToken,event)){
-               model.addAttribute("messenger","Please check your email and verify your account");
-           }else {
-               model.addAttribute("requestToken","/user/registration/resendRegistrationConfirm");
-               model.addAttribute("messenger","token is not correct");
-           }
-        }
-        return "user/wait-confirm-token";
-    }
-
-
 }

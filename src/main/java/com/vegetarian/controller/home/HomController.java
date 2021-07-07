@@ -12,23 +12,18 @@ import java.net.URISyntaxException;
 @Controller
 @RequestMapping("/")
 public class HomController {
-
-
-
-    @GetMapping("/api/home")
-    @ResponseBody
-    public String Test(){
-        return " ";
-    }
-
     @GetMapping(value = {"","home","index"})
     public String showViewHome(){
         return "index";
     }
 
-    @GetMapping("/test")
-    public String showTest(){
-        return "test";
+    @GetMapping("contact")
+    public String showViewContact(){
+        return "contact";
+    }
+    @GetMapping("about")
+    public String showViewAbout(){
+        return "about";
     }
 
 }

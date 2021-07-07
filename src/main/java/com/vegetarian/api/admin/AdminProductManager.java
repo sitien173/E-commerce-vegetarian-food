@@ -27,5 +27,8 @@ public class AdminProductManager {
         }
         return ResponseEntity.badRequest().build();
     }
-
+    @GetMapping("/total")
+    public int getTotal(){
+        return productService.totalProduct();
+    }
 }

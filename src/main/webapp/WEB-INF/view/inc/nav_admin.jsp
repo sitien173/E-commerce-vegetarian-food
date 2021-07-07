@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
@@ -8,12 +9,8 @@
         <li class="nav-item profile">
             <div class="profile-desc">
                 <div class="profile-pic">
-                    <div class="count-indicator">
-                        <img class="img-xs rounded-circle " src="${pageContext.request.contextPath}${sessionScope.logged.avatar}">
-                        <span class="count bg-success"></span>
-                    </div>
                     <div class="profile-name">
-                        <h5 class="mb-0 font-weight-normal">${sessionScope.logged.name}</h5>
+                        <h5 class="mb-0 font-weight-normal">${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}</h5>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -70,13 +67,13 @@
               <span class="menu-icon">
                 <i class="fas fa-user"></i>
               </span>
-                <span ondblclick="location.href='${pageContext.request.contextPath}/admin/user/'" class="menu-title">User Management</span>
+                <span ondblclick="location.href='<c:url value="/admin/user/list"/> '" class="menu-title">User Management</span>
 
             </a>
             <div class="collapse" id="user">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/admin/user/add">Add</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/admin/user/">All User</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<c:url value="/admin/user/add"/>">Add</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<c:url value="/admin/user/list"/>">All User</a></li>
                 </ul>
             </div>
         </li>
@@ -85,13 +82,13 @@
               <span class="menu-icon">
                  <i class="fas fa-folder-plus"></i>
               </span>
-                <span ondblclick="location.href='${pageContext.request.contextPath}/admin/category/'" class="menu-title">Category</span>
+                <span ondblclick="location.href='<c:url value="/admin/categories/list"/>'" class="menu-title">Category</span>
 
             </a>
             <div class="collapse" id="category">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/admin/category/add">Add</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/admin/category/">All Category</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<c:url value="/admin/categories/add"/>">Add</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<c:url value="/admin/categories/list"/>">All Category</a></li>
                 </ul>
             </div>
         </li>
@@ -100,27 +97,27 @@
               <span class="menu-icon">
                 <i class="fab fa-product-hunt"></i>
               </span>
-                <span ondblclick="location.href='${pageContext.request.contextPath}/admin/product/'" class="menu-title">Product</span>
+                <span ondblclick="location.href='<c:url value="/admin/product/list"/>'" class="menu-title">Product</span>
 
             </a>
             <div class="collapse" id="product">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/admin/product/add">Add</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/admin/product/">All Product</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<c:url value="/admin/product/add"/>">Add</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<c:url value="/admin/product/list"/>">All Product</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="${pageContext.request.contextPath}/admin/order/">
+            <a class="nav-link" href="<c:url value="/admin/invoice/list"/>">
               <span class="menu-icon">
                 <i class="fas fa-cart-plus"></i>
               </span>
-                <span class="menu-title">Order</span>
+                <span class="menu-title">Invoice</span>
             </a>
         </li>
 
         <li class="nav-item menu-items">
-            <a class="nav-link" href="${pageContext.request.contextPath}/admin/feedback/">
+            <a class="nav-link" href="<c:url value="/admin/feedback/list"/>">
               <span class="menu-icon">
                <i class="fas fa-comment-alt"></i>
               </span>

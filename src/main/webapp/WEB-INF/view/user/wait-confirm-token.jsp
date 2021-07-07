@@ -1,29 +1,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ngosi
-  Date: 6/29/2021
-  Time: 8:00 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Chờ xác nhận</title>
-    <c:import url="../inc/head.jsp"/>
-    <style>
-        .content {
-            position: relative;
-            top: 30%;
-        }
-    </style>
+    <c:import url="../inc/headUser.jsp"/>
 </head>
 <body>
-        <div align="center" class="content">
-            <h5 class="text-info"><c:out value="${messenger}"/></h5>
-            <c:if test="${not empty param.token}">
-                <a class="text-info" href="<c:url value="${requestToken}?token=${param.token}"/>">New confirmation request</a>
-            </c:if>
-        </div>
+<c:import url="../inc/header.jsp"/>
+       <div class="container" style="margin: 50px">
+           <div class="row d-flex justify-content-center">
+               <div align="center" class="col-6">
+                   <p class="lead text-center text-info h5"><c:out value="${messenger}"/></p>
+               </div>
+           </div>
+       </div>
+<c:import url="../inc/footer.jsp"/>
+<!-- Start Script -->
+<script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/templatemo.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/main.js"></script>
 </body>
 </html>

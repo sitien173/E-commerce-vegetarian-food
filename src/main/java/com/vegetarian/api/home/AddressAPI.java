@@ -27,7 +27,6 @@ public class AddressAPI {
     private List<Province> getAllProvince(){
         return provinceService.getAllProvince();
     }
-
 //    Get all district by province_id
     @GetMapping("/district/{id}")
     private List<District> getAllDistrictByProvinceId(@PathVariable("id") int provinceId){

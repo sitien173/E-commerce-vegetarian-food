@@ -45,6 +45,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public boolean updateStatus(int status, int id) {
-        return updateStatus(status,id);
+        return feedbackDao.updateStatus(status,id);
+    }
+
+    @Override
+    public int totalFeedback() {
+        return feedbackDao.totalFeedback();
     }
 }

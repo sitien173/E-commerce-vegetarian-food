@@ -14,26 +14,13 @@ const $navDelivering = $('#nav-delivering-tab');
 const $navDelivered = $('#nav-delivered-tab');
 const $navConfirmCancel =$('#nav-confirm-cancel-tab');
 const $navCancel = $('#nav-cancel-tab');
-function formatDate(day,month,year,hour,minute,second) {
-    var date = new Date(Date.UTC(year,month-1,day,hour,minute,second));
-    return date.toISOString().replace("T"," ").replace('.000Z','');
-}
-function status(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response)
-    } else {
-        return Promise.reject(new Error(response.statusText))
-    }
-}
-function json(response) {
-    return response.json();
-}
+
 function showInfoItem(invoiceId) {
     const $modalTableBody = $('#modal-table-body');
     const $modalTabInfo = $('#nav-info-content');
     fetch(URL + "/user/api/invoice/" + invoiceId)
-        .then(status)
-        .then(json)
+        .then(checkStatus)
+        .then(convertJson)
         .then((data) => {
             $modalTableBody.html('');
             data.items.forEach(item => {
@@ -85,15 +72,15 @@ function showInfoItem(invoiceId) {
 function updateStatusInvoice($root,stt) {
     var id = $root.getAttribute('value');
     fetch(URL + "/user/invoice/updateStatus/"+id+"/"+stt+"",{method: 'GET'})
-        .then(status)
+        .then(checkStatus)
         .then(() => {
             $root.innerHTML = 'ĐÃ GỬI YÊU CẦU';
         }).catch(reason => console.error(reason));
 }
 function getInvoice(url,root){
     fetch(URL + url)
-        .then(status)
-        .then(json)
+        .then(checkStatus)
+        .then(convertJson)
         .then((data) =>{
             root.html('');
             data.forEach(item => {

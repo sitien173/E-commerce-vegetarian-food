@@ -1,21 +1,11 @@
 var table;
-function status(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response)
-    } else {
-        return Promise.reject(new Error(response.statusText))
-    }
-}
-function json(response) {
-    return response.json();
-}
 function edit(categoryId) {
     location.href = URL + "/admin/categories/edit/" + categoryId;
 }
 function del(categoryId) {
     fetch(URL + "/admin/api/categories/delete/" + categoryId, {
         method: "DELETE",
-    }).then(status)
+    }).then(checkStatus)
         .then(() => {
             showPopup("success","Delete Item","Thành công");
             table.row($('button#'+categoryId+'').parents('tr')).remove().draw();
@@ -46,8 +36,6 @@ function initTable(){
                 {data: 'actions'},
             ]
         })
-    }).fail(function () {
-        alert();
     });
 }
 document.addEventListener("DOMContentLoaded",function () {

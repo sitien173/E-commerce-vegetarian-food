@@ -1,5 +1,4 @@
 package com.vegetarian.controller.user;
-
 import com.vegetarian.entity.Invoice;
 import com.vegetarian.entity.Item;
 import com.vegetarian.entity.Product;
@@ -10,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/cart")
 public class CartController {
-
     @Autowired
     private ProductService productService;
     @GetMapping(value = {"","/"})

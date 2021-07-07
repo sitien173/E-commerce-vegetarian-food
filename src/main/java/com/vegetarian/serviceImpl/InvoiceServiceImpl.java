@@ -14,11 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
-
     @Autowired
     private InvoiceDao invoiceDao;
     @Autowired
@@ -84,5 +81,45 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<Invoice> getAllInvoiceByUsername(String username) {
         return invoiceDao.getAllInvoiceByUsername(username);
+    }
+
+    @Override
+    public int totalInvoice() {
+        return invoiceDao.totalInvoice();
+    }
+
+    @Override
+    public Double getRevenue() {
+        return invoiceDao.getRevenue();
+    }
+
+    @Override
+    public Double getRevenueByMonth(String month) {
+        return invoiceDao.getRevenueByMonth(month);
+    }
+
+    @Override
+    public Double getRevenueMethod(String month, String payMethod) {
+        return invoiceDao.getRevenueMethod(month,payMethod);
+    }
+
+    @Override
+    public Double getRevenueMethod(String payMethod) {
+        return invoiceDao.getRevenueMethod(payMethod);
+    }
+
+    @Override
+    public List<Invoice> getTop10() {
+        return invoiceDao.getTop10();
+    }
+
+    @Override
+    public LinkedHashMap<String, Double> getTotalMoneyUsers() {
+        return invoiceDao.getTotalMoneyUsers();
+    }
+
+    @Override
+    public List<Invoice> getTop10Recently() {
+        return invoiceDao.getTop10Recently();
     }
 }

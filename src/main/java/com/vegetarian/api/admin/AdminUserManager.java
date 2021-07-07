@@ -29,4 +29,8 @@ public class AdminUserManager {
         }
         return ResponseEntity.badRequest().build();
     }
+    @GetMapping("/total")
+    public int getTotal(){
+        return userService.totalUser();
+    }
 }

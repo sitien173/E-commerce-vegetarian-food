@@ -10,6 +10,7 @@ public interface FeedbackDao {
     List<Feedback> getAllFeedback(int status);
     List<Feedback> getAllFeedbackProduct(int productId);
     Map<Float,Integer> getRatingAndCountComment(int productId);
+    int totalFeedback();
     boolean deleteFeedback(int id);
     boolean updateStatus(int status,int id);
 

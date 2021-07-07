@@ -138,4 +138,10 @@ public class UserDaoImpl implements UserDao {
         String SQL = "select * from [appUser]";
         return jdbcTemplate.query(SQL,userMapper);
     }
+
+    @Override
+    public int totalUser() throws EmptyResultDataAccessException {
+        String SQL = "select count(username) from [appUser]";
+        return jdbcTemplate.queryForObject(SQL,Integer.class);
+    }
 }

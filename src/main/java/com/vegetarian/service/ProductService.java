@@ -9,8 +9,10 @@ public interface ProductService {
     List<Product> getAllProduct(int cateId);
     List<Product> getAllProductHighlight();
     List<Product> getAllProductBestSeller();
-    List<Product> getAllProductByCategory(int cateID);
+    List<Product> getProductSearchAjax(String text);
+    List<Product> getAllProductSaleOff();
     Product getProduct(int id);
     boolean update(Product product);
     boolean delete(int id);
+    int totalProduct();
 }

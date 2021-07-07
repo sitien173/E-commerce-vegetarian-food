@@ -8,5 +8,4 @@ public interface VerificationTokenService {
     VerificationToken getVerificationToken(String token);
     void sendVerificationToken(OnRegistrationCompleteEvent event);
     boolean deleteVerificationToken(int id,String username);
-    boolean resendVerificationToken(VerificationToken verificationToken, OnRegistrationCompleteEvent event);
 }

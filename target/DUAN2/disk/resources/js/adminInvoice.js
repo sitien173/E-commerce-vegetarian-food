@@ -1,17 +1,3 @@
-function status(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response)
-    } else {
-        return Promise.reject(new Error(response.statusText))
-    }
-}
-function json(response) {
-    return response.json();
-}
-function formatDate(day,month,year,hour,minute,second) {
-    var date = new Date(Date.UTC(year,month-1,day,hour,minute,second));
-    return date.toISOString().replace("T"," ").replace('.000Z','');
-}
 function appendSelect(id,$root) {
     const $select = $('select[name='+id+']');
     const stt_id = $root.value;
@@ -24,7 +10,7 @@ function appendSelect(id,$root) {
 }
 function deleteInvoice(id) {
     fetch(URL + "/admin/api/invoice/delete/"+id,{method: 'DELETE'})
-        .then(status)
+        .then(checkStatus)
         .then(() => {
             $('#orders').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
         }).catch(reason => console.error(reason));
@@ -32,7 +18,7 @@ function deleteInvoice(id) {
 function updateStatusInvoice(id,$root) {
     stt = $root.value;
     fetch(URL + "/admin/api/invoice/updateStatus/"+id+"/"+stt+"",{method: 'POST'})
-        .then(status)
+        .then(checkStatus)
         .then(() => {
             $('#orders').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
         }).catch(reason => console.error(reason));
@@ -42,8 +28,8 @@ function edit(id) {
 }
 function initInvoice(stt= 0) {
     fetch(URL + "/admin/api/invoice/list/" + stt)
-        .then(status)
-        .then(json)
+        .then(checkStatus)
+        .then(convertJson)
         .then((data) => {
             const $content = $('#content');
             $content.html('');

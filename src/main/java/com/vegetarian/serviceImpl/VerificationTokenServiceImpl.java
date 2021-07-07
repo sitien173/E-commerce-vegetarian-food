@@ -2,6 +2,7 @@ package com.vegetarian.serviceImpl;
 
 import com.vegetarian.dao.VerificationTokenDao;
 import com.vegetarian.entity.VerificationToken;
+import com.vegetarian.service.UserService;
 import com.vegetarian.service.VerificationTokenService;
 import com.vegetarian.ultil.OnRegistrationCompleteEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
     private VerificationTokenDao verificationTokenDao;
     @Autowired
     private ApplicationEventPublisher eventPublisher;
+    @Autowired
+    private UserService userService;
     @Override
     public void insertVerificationToken(String username, String token) {
         verificationTokenDao.insertVerificationToken(username,token);
@@ -36,13 +39,4 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
         return verificationTokenDao.deleteVerificationToken(id,username);
     }
 
-    @Transactional(rollbackFor = SQLException.class)
-    @Override
-    public boolean resendVerificationToken(VerificationToken verificationToken, OnRegistrationCompleteEvent event) {
-        // delete verification token
-        if(this.deleteVerificationToken(verificationToken.getId(),verificationToken.getUser().getUsername())){
-            eventPublisher.publishEvent(event);
-        }else return false;
-        return true;
-    }
 }

@@ -69,4 +69,10 @@ public class FeedbackDaoImpl implements FeedbackDao {
         Object[] inputs = new Object[]{status,id};
         return jdbcTemplate.update(SQL,inputs) > 0;
     }
+
+    @Override
+    public int totalFeedback() throws EmptyResultDataAccessException{
+        String SQL = "select count(id) from [feedback]";
+        return jdbcTemplate.queryForObject(SQL,Integer.class);
+    }
 }

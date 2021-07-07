@@ -71,6 +71,12 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public List<Product> getProductSearchAjax(String text) throws EmptyResultDataAccessException {
+        String query = "select * from dbo.[product] where upper(name) LIKE N'%"+text+"%'";
+        return jdbcTemplate.query(query,productMapper);
+    }
+
+    @Override
     public Product getProduct(int id) throws EmptyResultDataAccessException{
         String SQL = "select * from [product] where id=?";
         return jdbcTemplate.queryForObject(SQL,new Object[]{id},productMapper);
@@ -124,5 +130,17 @@ public class ProductDaoImpl implements ProductDao {
         String SQL = "update [product] set quantity = ?,sold = ? where id= ?";
         Object[] inputs = new Object[]{quantity,sold,productId};
         jdbcTemplate.update(SQL,inputs);
+    }
+
+    @Override
+    public int totalProduct() throws EmptyResultDataAccessException{
+        String SQL = "select count(id) from [product]";
+        return jdbcTemplate.queryForObject(SQL,Integer.class);
+    }
+
+    @Override
+    public List<Product> getAllProductSaleOff() throws EmptyResultDataAccessException{
+        String SQL = "select * from [product] where sale_price > 0";
+        return jdbcTemplate.query(SQL,productMapper);
     }
 }

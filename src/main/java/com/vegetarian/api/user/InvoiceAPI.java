@@ -16,7 +16,7 @@ public class InvoiceAPI {
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
             produces = "text/plain;charset=UTF-8")
-    public String getAllInvoiceById(@PathVariable("id") int id, Principal principal){
+    public String getAllInvoiceById(@PathVariable("id") int id){
         return new Gson().toJson(invoiceService.getInvoice(id));
     }
     @RequestMapping(value = "/list",

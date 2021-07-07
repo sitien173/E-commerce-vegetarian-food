@@ -1,13 +1,3 @@
-function status(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response)
-    } else {
-        return Promise.reject(new Error(response.statusText))
-    }
-}
-function json(response) {
-    return response.json();
-}
 function editProduct(id) {
     location.href = URL + "/admin/product/edit/"+id+"";
 }
@@ -15,15 +5,15 @@ function deleteProduct(id) {
     fetch(URL + "/admin/api/product/delete/" + id, {
         method: 'DELETE',
     })
-        .then(status)
+        .then(checkStatus)
         .then(() => {
             $('#products').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
         }).catch(reason => console.log(reason))
 }
 function getCategories(root) {
     fetch(URL + "/admin/api/categories/list")
-        .then(status)
-        .then(json)
+        .then(checkStatus)
+        .then(convertJson)
         .then((data) => {
             root.innerHTML = "";
             data.forEach(item => {
@@ -34,10 +24,11 @@ function getCategories(root) {
             });
         }).catch(reason => console.log(reason));
 }
-function initProduct(cateId) {
-    fetch(URL + "/admin/api/product/" + cateId)
-        .then(status)
-        .then(json)
+function initProduct() {
+    const categories = document.getElementById("categories")
+    fetch(URL + "/admin/api/product/" + categories.value)
+        .then(checkStatus)
+        .then(convertJson)
         .then((data) => {
             var modifierProducts = data.map(item => {
                 console.log(item);
@@ -73,13 +64,10 @@ function initProduct(cateId) {
 }
 document.addEventListener("DOMContentLoaded",function () {
     const categories = document.getElementById("categories");
-    let promise = new Promise((resolve, reject) => {
-        getCategories(categories);
-    }).then(() => {
-        initProduct(categories.value);
-    });
-    categories.addEventListener("change",function () {
+    getCategories(categories);
+    setTimeout(initProduct,1000);
+   categories.addEventListener("change",function () {
            $('#products').DataTable().clear().destroy();
-           initProduct(this.value);
+           initProduct();
     });
 })

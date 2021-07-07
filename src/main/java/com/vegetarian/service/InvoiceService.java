@@ -16,4 +16,12 @@ public interface InvoiceService {
     boolean delete(int id);
     boolean update(Invoice invoice);
     boolean updateQuantityProduct(Invoice invoice);
+    int totalInvoice();
+    Double getRevenue();
+    Double getRevenueByMonth(String month);
+    Double getRevenueMethod(String month,String payMethod);
+    Double getRevenueMethod(String payMethod);
+    List<Invoice> getTop10();
+    LinkedHashMap<String,Double> getTotalMoneyUsers();
+    List<Invoice> getTop10Recently();
 }

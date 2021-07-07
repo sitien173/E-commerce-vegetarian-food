@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.*;
 public class ProductAPI {
     @Autowired
     private ProductService productService;
-
     @RequestMapping(value = "/highlight",
                     produces = "text/plain;charset=UTF-8",
                     method = RequestMethod.GET)
     public String getAllProductHighlight(){
         return new Gson().toJson(productService.getAllProductHighlight());
+    }
+    @RequestMapping(value = "/sale-off",
+            produces = "text/plain;charset=UTF-8",
+            method = RequestMethod.GET)
+    public String getAllProductSaleOff(){
+        return new Gson().toJson(productService.getAllProductSaleOff());
     }
     @RequestMapping(value = "/best-seller",
             produces = "text/plain;charset=UTF-8",

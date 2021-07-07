@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Repository
@@ -108,5 +109,73 @@ public class InvoiceDaoImpl implements InvoiceDao {
     public List<Invoice> getAllInvoiceByUsername(String username) {
         String SQL = "select * from [invoice] where username = ?";
         return jdbcTemplate.query(SQL,new Object[]{username},invoiceMapper);
+    }
+
+    @Override
+    public int totalInvoice() throws EmptyResultDataAccessException {
+        String SQL = "select count(id) from [invoice]";
+        return jdbcTemplate.queryForObject(SQL,Integer.class);
+    }
+    @Override
+    public Double getRevenue() throws EmptyResultDataAccessException{
+        String SQL = "SELECT SUM(total) \n" +
+                "FROM dbo.[invoice] \n" +
+                "WHERE status = 3";
+        return jdbcTemplate.queryForObject(SQL,Double.class);
+    }
+
+    @Override
+    public Double getRevenueByMonth(String month) throws EmptyResultDataAccessException{
+        String SQL = "SELECT SUM(total) AS total\n" +
+                "FROM dbo.[invoice]\n" +
+                "WHERE DATENAME(month, created_at) = ? AND status = 3";
+        return jdbcTemplate.queryForObject(SQL,new Object[]{month},Double.class);
+    }
+
+    @Override
+    public Double getRevenueMethod(String month,String payMethod) {
+        String SQL = "SELECT SUM(total) AS total\n" +
+                "FROM dbo.[invoice]\n" +
+                "WHERE DATENAME(month, created_at) = ? AND status = 3 AND pay_method = ?";
+        Object[] inputs = new Object[]{month,payMethod};
+        return jdbcTemplate.queryForObject(SQL,inputs,Double.class);
+    }
+
+    @Override
+    public Double getRevenueMethod(String payMethod)  {
+        String SQL = "SELECT SUM(total) \n" +
+                "FROM dbo.[invoice]\n" +
+                "WHERE pay_method = ? and status = 3";
+        return jdbcTemplate.queryForObject(SQL,new Object[]{payMethod},Double.class);
+    }
+
+    @Override
+    public List<Invoice> getTop10() {
+        String query = "SELECT TOP 10 *\n" +
+                "FROM dbo.[invoice]\n" +
+                "WHERE status = 3 \n" +
+                "ORDER BY total DESC";
+        return jdbcTemplate.query(query,invoiceMapper);
+    }
+
+    @Override
+    public LinkedHashMap<String,Double> getTotalMoneyUsers() {
+        String query = "SELECT TOP 10 username,SUM(total) AS total\n" +
+                "FROM dbo.[invoice] \n" +
+                "Where status = 3 \n" +
+                "GROUP BY username\n";
+        LinkedHashMap<String,Double> linkedHashMap = new LinkedHashMap<>();
+        jdbcTemplate.query(query,rs -> {
+            linkedHashMap.put(rs.getString("username"),rs.getDouble("total"));
+        });
+        return linkedHashMap;
+    }
+
+    @Override
+    public List<Invoice> getTop10Recently() {
+        String query = "SELECT TOP 10 *\n" +
+                "FROM [invoice]\n" +
+                "ORDER BY id DESC";
+        return jdbcTemplate.query(query,invoiceMapper);
     }
 }

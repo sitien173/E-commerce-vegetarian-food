@@ -53,4 +53,10 @@ public class CategoryDaoImpl implements CategoryDao {
         };
         return jdbcTemplate.update(SQL,inputs) > 0;
     }
+
+    @Override
+    public int totalCategories() throws EmptyResultDataAccessException {
+       String SQL = "select count(id) from [categories]";
+       return jdbcTemplate.queryForObject(SQL,Integer.class);
+    }
 }

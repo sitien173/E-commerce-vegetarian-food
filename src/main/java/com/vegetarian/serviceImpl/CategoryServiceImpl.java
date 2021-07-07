@@ -36,4 +36,9 @@ public class CategoryServiceImpl implements CategoryService {
     public boolean updateCategory(Category category) {
         return categoryDao.updateCategory(category);
     }
+
+    @Override
+    public int totalCategories() {
+        return categoryDao.totalCategories();
+    }
 }

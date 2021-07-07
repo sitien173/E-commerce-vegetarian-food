@@ -10,6 +10,7 @@ public interface UserDao{
     User getUserByEmailL(String email);
     User getUserByUserName(String username);
     User getUserByPhone(String phone);
+    int totalUser();
     boolean insertUser(User user);
     boolean updateUser(User user);
     boolean deleteUser(String username);

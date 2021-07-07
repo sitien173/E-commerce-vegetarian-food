@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminFeedbackAPI {
     @Autowired
     private FeedbackService feedbackService;
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id){
         if(feedbackService.deleteFeedback(id)) return ResponseEntity.ok().build();
         else return ResponseEntity.badRequest().build();
@@ -20,5 +20,9 @@ public class AdminFeedbackAPI {
                                           @PathVariable("status") int status){
         if(feedbackService.updateStatus(status,id)) return ResponseEntity.ok().build();
         else return ResponseEntity.badRequest().build();
+    }
+    @GetMapping("/total")
+    public int getTotal(){
+        return feedbackService.totalFeedback();
     }
 }

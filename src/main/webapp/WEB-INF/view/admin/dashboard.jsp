@@ -6,8 +6,7 @@
     <title>Admin</title>
     <c:import url="../inc/head.jsp"/>
     <link rel="stylesheet" href="<c:url value="/disk/resources/css/style.css"/>"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
 <div class="container-scroller">
@@ -30,7 +29,7 @@
                                        <h6 id="totalUser" class="font-weight-bold text-info">$593</h6>
                                    </div>
                                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                       <p class="text-muted">Total User</p>
+                                       <a href="<c:url value="/admin/user/list"/>" class="text-center text-decoration-none">Total User</a>
                                    </div>
                                </div>
                            </div>
@@ -43,7 +42,7 @@
                                        <h6 id="totalOrder" class="font-weight-bold text-info">$593</h6>
                                    </div>
                                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                       <p class="text-muted">Total Order</p>
+                                       <a href="<c:url value="/admin/invoice/list"/>" class="text-center text-decoration-none">Total Invoice</a>
                                    </div>
                                </div>
                            </div>
@@ -56,7 +55,7 @@
                                    <h6 id="totalFeedback" class="font-weight-bold text-info">$593</h6>
                                </div>
                                <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                   <p class="text-muted">Total FeedBacks</p>
+                                   <a href="<c:url value="/admin/feedback/list"/>" class="text-center text-decoration-none">Total FeedBacks</a>
                                </div>
                            </div>
                        </div>
@@ -69,7 +68,7 @@
                                        <h6 id="totalProduct" class="font-weight-bold text-info">$593</h6>
                                    </div>
                                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                       <p class="text-muted">Total Products</p>
+                                       <a href="/admin/product/list" class="text-center text-decoration-none">Total Products</a>
                                    </div>
                                </div>
                            </div>
@@ -82,7 +81,7 @@
                                        <h6 id="totalCategories" class="font-weight-bold text-info">$593</h6>
                                    </div>
                                    <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                       <p class="text-muted">Total Categories</p>
+                                       <a href="/admin/categories/list" class="text-center text-decoration-none">Total Categories</a>
                                    </div>
                                </div>
                            </div>
@@ -272,6 +271,6 @@
     </div>
 
 </div>
-<script src="${pageContext.request.contextPath}/resources/js/adminDashboard.js"></script>
+<script src="<c:url value="/disk/resources/js/adminDashboard.js"/>"></script>
 </body>
 </html>

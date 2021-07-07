@@ -22,4 +22,8 @@ public class AdminCategoriesManager {
     private ResponseEntity<?> edit(@PathVariable("id") int id){
         return categoryService.deleteCategory(id) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
+    @GetMapping("/total")
+    public int getTotal(){
+        return categoryService.totalCategories();
+    }
 }

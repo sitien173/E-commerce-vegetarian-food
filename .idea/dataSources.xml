@@ -7,5 +7,11 @@
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
       <jdbc-url>jdbc:sqlserver://localhost:1433;database=duan2</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="@aa1lz0xknr5ldi0.capxe8jidsrq.us-east-2.rds.amazonaws.com" uuid="d40f63f5-24c1-4f24-8ad4-607a9de453dd">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://aa1lz0xknr5ldi0.capxe8jidsrq.us-east-2.rds.amazonaws.com</jdbc-url>
+    </data-source>
   </component>
 </project>

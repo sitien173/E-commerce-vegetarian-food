@@ -50,7 +50,6 @@ public class ForgotPasswordController {
             }
         }else{
             model.addAttribute("messenger","token does not exist");
-            model.addAttribute("requestToken","/user/forgotPassword/resendTokenForgotPassword");
             return "user/wait-confirm-token";
         }
         return "user/update-password";
@@ -85,21 +84,5 @@ public class ForgotPasswordController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }else return "user/update-password";
         return "redirect:/index";
-    }
-    @GetMapping("/resendTokenForgotPassword")
-    public String resendTokenForgotPassword(Model model,@RequestParam("token") String token,HttpServletRequest request){
-        VerificationToken verificationToken = verificationTokenService.getVerificationToken(token);
-        if(verificationToken != null){
-            String appUrl = this.getAppUrl(request);
-            String redirectLink = "/user/forgotPassword/accessToken";
-            OnRegistrationCompleteEvent event = new OnRegistrationCompleteEvent(verificationToken.getUser(), appUrl,redirectLink);
-            if(verificationTokenService.resendVerificationToken(verificationToken,event)){
-                model.addAttribute("messenger","Please check your email and verify your account");
-            }else {
-                model.addAttribute("requestToken","/user/forgotPassword/resendTokenForgotPassword");
-                model.addAttribute("messenger","token is not correct");
-            }
-        }
-        return "user/wait-confirm-token";
     }
 }

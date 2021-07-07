@@ -2,7 +2,7 @@ var table;
 function deleteUser(username) {
     fetch(URL + "/admin/api/user/delete/" + username, {
         method: 'DELETE',
-    }).then(status)
+    }).then(checkStatus)
         .then(() => {
             table.row($('button#'+username+'').parents('tr')).remove().draw();
         })
@@ -18,7 +18,7 @@ function initTable(){
                 actions: "<button id="+eachUser.username.trim()+" onclick='deleteUser(\""+eachUser.username.trim()+"\")' class='delete badge badge-outline-danger'><i class='far fa-times-circle'></i></button> &nbsp;&nbsp;" +
                          "<button onclick='editUser(\""+eachUser.username.trim()+"\")' class='edit badge badge-outline-success'><i class=\"far fa-user-circle\"></i></button>",
                 username: eachUser.username,
-                name: "<img class='img-xs rounded-circle' src='"+URL+"/"+eachUser.avatar+"'><span class='pl-2'>"+eachUser.name+"</span>",
+                name: "<img class='img-xs rounded-circle' src='"+URL+""+eachUser.avatar+"'><span class='pl-2'>"+eachUser.name+"</span>",
                 email: eachUser.email,
                 phone: eachUser.phone,
                 address: "<span class=\"d-inline-block text-truncate\" style=\"max-width: 150px;\">"+eachUser.address.addr+"</span>",

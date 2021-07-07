@@ -69,6 +69,10 @@ public class UserServiceImpl implements UserService {
         if (user == null)
             throw new UsernameNotFoundException(String.format("Username %s not found",username));
         return user;
+    }
 
+    @Override
+    public int totalUser() {
+        return userDao.totalUser();
     }
 }

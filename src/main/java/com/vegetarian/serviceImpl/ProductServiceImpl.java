@@ -41,8 +41,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProductByCategory(int cateID) {
-        return productDao.getAllProduct(cateID);
+    public List<Product> getProductSearchAjax(String text) {
+        return productDao.getProductSearchAjax(text);
+    }
+
+    @Override
+    public List<Product> getAllProductSaleOff() {
+        return productDao.getAllProductSaleOff();
     }
 
     @Override
@@ -63,5 +68,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean delete(int id) {
         return productDao.delete(id);
+    }
+
+    @Override
+    public int totalProduct() {
+        return productDao.totalProduct();
     }
 }
