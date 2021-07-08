@@ -32,6 +32,8 @@ public class RegistrationController {
     private UserService userService;
     @Autowired
     private VerificationTokenService verificationTokenService;
+    @Autowired
+    private FileService fileService;
 
 
     private String getAppUrl(HttpServletRequest request){
@@ -58,7 +60,7 @@ public class RegistrationController {
         if(result.hasErrors()){
             return "user/registration";
         }
-        FileService.save(file);
+        fileService.save(file);
         Set<SimpleGrantedAuthority> authorizes = new HashSet<>();
         authorizes.add(new SimpleGrantedAuthority("ROLE_USER"));
         user.setGrantedAuthorities(authorizes);

@@ -25,6 +25,8 @@ import java.util.Set;
 public class AdminUserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private FileService fileService;
     @GetMapping("/list")
     public String showViewUser(){
         return "admin/user_list";
@@ -56,7 +58,7 @@ public class AdminUserController {
         if(result.hasErrors()){
             return "admin/user_add";
         }
-        FileService.save(file);
+        fileService.save(file);
         Set<SimpleGrantedAuthority> authorizes = new HashSet<>();
         authorizes.add(new SimpleGrantedAuthority(role));
         user.setGrantedAuthorities(authorizes);
@@ -78,7 +80,7 @@ public class AdminUserController {
         if(result.hasErrors()){
             return "admin/user_edit";
         }
-        FileService.save(file);
+        fileService.save(file);
         Set<SimpleGrantedAuthority> authorizes = new HashSet<>();
         authorizes.add(new SimpleGrantedAuthority(role));
         user.setGrantedAuthorities(authorizes);

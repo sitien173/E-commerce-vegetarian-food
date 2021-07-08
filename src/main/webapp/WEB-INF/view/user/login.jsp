@@ -1,42 +1,62 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Đăng Nhập</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="sitien173">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/disk/resources/css/login.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Đăng ký</title>
+    <c:import url="../inc/headUser.jsp"/>
+    <!--
+    -->
 </head>
 <body>
-<div class="container" style="width: 500px;min-height: 500px" align="center">
-    <div class="container-fluid" style="width:350px;margin: auto">
-        <c:url var="action" value="/user/login"/>
-        <form id="form" action="${action}" method="post" class="form-container">
-            <h2 class="text-danger">Login</h2>
-            <p class="text-info">for better experience</p>
-            <fieldset class="form-group">
-                <label for="username">Email</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="username"/>
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
-            </fieldset>
-            <a id="forgotPassword" class="text-info" href="<c:url value="/user/forgotPassword/"/>">Forgot your password?</a>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <a style="position: absolute;right: 0;bottom: 0" href="<c:url value="/user/registration/"/>" class="text-info" id="registration">Create Account <i class="fas fa-arrow-right"></i></a>
-
-        </form>
+<c:import url="../inc/header.jsp"/>
+<div class="container" style="margin: 50px">
+    <div class="row d-flex justify-content-center">
+        <div class="col-9" align="center">
+            <c:url var="action" value="/user/login"/>
+            <form id="form" action="${action}" method="post">
+                <h2 class="text-center text-danger">Đăng nhập</h2>
+                <p class="text-center text-info">for better experience</p>
+                <fieldset class="row col-6 form-group">
+                    <label for="username">username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="username"/>
+                </fieldset>
+                <fieldset class="row col-6 form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+                </fieldset>
+                <div class="row">
+                    <a id="forgotPassword" class="text-center text-info" href="<c:url value="/user/forgotPassword/"/>">Quên mật khẩu?</a>
+                </div>
+                <div class="row d-flex justify-content-center" style="margin: 10px 0">
+                    <button type="submit" class="col-3 btn btn-primary">Đăng nhập</button>
+                </div>
+                <a href="<c:url value="/user/registration/"/>" class="text-info" id="registration">Chưa có tài khoản? Đăng ký <i class="fas fa-arrow-right"></i></a>
+            </form>
+        </div>
     </div>
+    <div class="modal"></div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/fontawesome.min.js" integrity="sha512-KCwrxBJebca0PPOaHELfqGtqkUlFUCuqCnmtydvBSTnJrBirJ55hRG5xcP4R9Rdx9Fz9IF3Yw6Rx40uhuAHR8Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Start Footer -->
+<c:import url="../inc/footer.jsp"/>
+<!-- End Footer -->
+
+<!-- Start Script -->
+<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
+<script src="<c:url value="/disk/resources/js/Address.js"/>"></script>
+<script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/templatemo.js"></script>
+<script src="${pageContext.request.contextPath}/disk/resources/js/main.js"></script>
+<script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
+
+<!-- End Script -->
 </body>
+
 </html>

@@ -21,12 +21,6 @@ public class PaypalServiceImpl implements PayPalService {
     private APIContext apiContext;
     // convert vnd to usd div DOLLAR
     private final int DOLLAR = 22000;
-    @Autowired
-    private InvoiceDao invoiceDao;
-    @Autowired
-    private ItemDao itemDao;
-
-
     @Override
     public String authorizePayment(com.vegetarian.entity.Invoice invoice,String successURL,String cancelURL) throws PayPalRESTException {
         Payer payer = getPayerInfo(invoice);

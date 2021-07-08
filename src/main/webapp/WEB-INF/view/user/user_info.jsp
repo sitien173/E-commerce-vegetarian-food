@@ -15,8 +15,9 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
        <div class="col-9" align="center">
+           <c:out value="${info}"/>
            <c:url value="/user/update" var="action"/>
-           <form:form modelAttribute="user" method="post" action="${action}" cssStyle="margin: 30px">
+           <form:form modelAttribute="user" method="post" action="${action}" cssStyle="margin: 30px" enctype="multipart/form-data">
                <form:hidden path="username"/>
                <form:hidden path="avatar"/>
                <form:hidden path="enabled"/>
@@ -108,7 +109,6 @@
 <script src="${pageContext.request.contextPath}/disk/resources/js/templatemo.js"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/main.js"></script>
 <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
-
 <!-- End Script -->
 </body>
 

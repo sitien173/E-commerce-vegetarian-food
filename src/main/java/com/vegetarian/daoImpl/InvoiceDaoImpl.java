@@ -2,11 +2,13 @@ package com.vegetarian.daoImpl;
 
 import com.vegetarian.dao.InvoiceDao;
 import com.vegetarian.entity.Invoice;
+import com.vegetarian.entity.Item;
 import com.vegetarian.mapper.InvoiceMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -109,6 +111,21 @@ public class InvoiceDaoImpl implements InvoiceDao {
     public List<Invoice> getAllInvoiceByUsername(String username) {
         String SQL = "select * from [invoice] where username = ?";
         return jdbcTemplate.query(SQL,new Object[]{username},invoiceMapper);
+    }
+
+    @Override
+    public boolean checkUserPurchase(String username,int productId) {
+        String SQL = " SELECT count(*)\n" +
+                "  FROM [appUser] a\n" +
+                "  LEFT JOIN invoice i\n" +
+                "  ON a.username = i.username WHERE a.username = ? \n" +
+                "  and EXISTS(SELECT * FROM [item] it LEFT JOIN product p ON it.product_id = p.id WHERE p.id = ?)";
+        try{
+            return jdbcTemplate.queryForObject(SQL,new Object[]{username,productId},Integer.class) > 0;
+        }catch (EmptyResultDataAccessException e){
+            e.getMessage();
+        }
+        return false;
     }
 
     @Override

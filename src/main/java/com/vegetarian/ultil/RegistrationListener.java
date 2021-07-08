@@ -7,6 +7,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @Component
@@ -14,8 +17,6 @@ public class RegistrationListener implements
         ApplicationListener<OnRegistrationCompleteEvent> {
     @Autowired
     private VerificationTokenService verificationTokenService;
-    @Autowired
-    private JavaMailSender mailSender;
 
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
@@ -27,12 +28,11 @@ public class RegistrationListener implements
         verificationTokenService.insertVerificationToken(user.getUsername(), token);
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
-        String confirmationUrl
-                = event.getAppUrl() + event.getRedirectLink() + "?token=" + token;
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(confirmationUrl);
-        mailSender.send(email);
+        String confirmationUrl = event.getAppUrl() + event.getRedirectLink() + "?token=" + token;
+        try {
+            EmailUtils.sendMail(recipientAddress,subject,confirmationUrl);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.getMessage();
+        }
     }
 }

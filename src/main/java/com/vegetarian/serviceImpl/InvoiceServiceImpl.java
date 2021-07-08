@@ -59,6 +59,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public boolean checkUserPurchase(String username, int productId) {
+        return invoiceDao.checkUserPurchase(username,productId);
+    }
+
+    @Override
     public boolean delete(int id) {
         return invoiceDao.delete(id);
     }

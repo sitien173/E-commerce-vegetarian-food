@@ -40,6 +40,7 @@ public class ItemDaoImpl implements ItemDao {
 
     }
 
+
     @Override
     public List<Item> getAllItemByInvoiceId(int invoiceId) throws EmptyResultDataAccessException {
         String SQL = "select * from [item] where invoice_id = ?";

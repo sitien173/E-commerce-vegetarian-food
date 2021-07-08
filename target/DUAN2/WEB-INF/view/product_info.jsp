@@ -4,9 +4,10 @@
 <html lang="en">
 
 <head>
-    <title>Zay Shop eCommerce HTML CSS Template</title>
+    <title>Thông tin sản phẩm</title>
    <c:import url="inc/headUser.jsp"/>
     <link rel="stylesheet" href="<c:url value="/disk/resources/css/feedback.css"/>"/>
+
 </head>
 
 <body>
@@ -35,7 +36,7 @@
                         <div class="carousel-inner product-links-wap" role="listbox">
                             <div class="carousel-item active">
                                 <div class="row">
-                                    <c:forEach var="i" begin="0" end="${product.images.size()}" step="1">
+                                    <c:forEach var="i" begin="0" end="${product.images.size() - 1}" step="1">
                                        <c:if test="${i<4}">
                                            <div class="col-sm-3">
                                                <a href="#">
@@ -111,7 +112,7 @@
                         </div>
                         <div class="row pb-3">
                             <div class="col d-grid">
-                                <button type="button" id="addToCart" class="btn btn-success btn-lg" name="submit">Add To Cart</button>
+                                <button type="button" onclick="addToCart(${productId},$('#product-quanity').val())" class="btn btn-success btn-lg">Add To Cart</button>
                             </div>
                         </div>
                     </div>
@@ -146,10 +147,8 @@
         </div>
         <div class="row d-flex justify-content-center ms-1">
             <div class="col-lg-6">
-                <c:if test="${not empty param.info}">
-                    <script>
-                        showPopup("success","FeedBack","<c:out value='${param.info}'/>");
-                    </script>
+                <c:if test="${not empty info or not empty param.info}">
+                   <span class="text-center text-danger h5"> <c:out value="${info}"/></span>
                 </c:if>
                 <c:url var="action" value="/user/feedback/add"/>
                 <form action="${action}" method="post" id="submit-feedback">
@@ -296,6 +295,7 @@
 <script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/productCard.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
+<script src="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/addToCart.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/bootstrap.bundle.min.js"></script>
@@ -364,10 +364,7 @@
                 e.preventDefault();
             }
         });
-        const $btnAddToCart = $('#addToCart');
-        $btnAddToCart.click(function () {
-            addToCart(${productId},$('#product-quanity').val());
-        })
+        const $btnAddToCart = document.getElementById("addtocart");
         $('#btn-more').click(function () {
             appendBodyFeedback();
         })

@@ -16,6 +16,7 @@ public interface InvoiceService {
     boolean delete(int id);
     boolean update(Invoice invoice);
     boolean updateQuantityProduct(Invoice invoice);
+    boolean checkUserPurchase(String username,int productId);
     int totalInvoice();
     Double getRevenue();
     Double getRevenueByMonth(String month);

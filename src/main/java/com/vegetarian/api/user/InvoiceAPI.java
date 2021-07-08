@@ -16,19 +16,21 @@ public class InvoiceAPI {
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET,
             produces = "text/plain;charset=UTF-8")
-    public String getAllInvoiceById(@PathVariable("id") int id){
+    public String getAllInvoiceById(@PathVariable("id") int id) {
         return new Gson().toJson(invoiceService.getInvoice(id));
     }
+
     @RequestMapping(value = "/list",
-                    method = RequestMethod.GET,
-                    produces = "text/plain;charset=UTF-8")
-    public String getAllInvoiceByUsername(Principal principal){
+            method = RequestMethod.GET,
+            produces = "text/plain;charset=UTF-8")
+    public String getAllInvoiceByUsername(Principal principal) {
         return new Gson().toJson(invoiceService.getAllInvoiceByUsername(principal.getName()));
     }
+
     @RequestMapping(value = "/list/{status}",
             method = RequestMethod.GET,
             produces = "text/plain;charset=UTF-8")
-    public String getAllInvoiceByUsernameAndStatus(@PathVariable("status") int status,Principal principal){
-        return new Gson().toJson(invoiceService.getAllInvoiceByStatus(status,principal.getName()));
+    public String getAllInvoiceByUsernameAndStatus(@PathVariable("status") int status, Principal principal) {
+        return new Gson().toJson(invoiceService.getAllInvoiceByStatus(status, principal.getName()));
     }
 }

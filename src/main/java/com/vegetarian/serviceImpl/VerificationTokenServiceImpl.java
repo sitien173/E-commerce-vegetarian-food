@@ -17,8 +17,6 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
     private VerificationTokenDao verificationTokenDao;
     @Autowired
     private ApplicationEventPublisher eventPublisher;
-    @Autowired
-    private UserService userService;
     @Override
     public void insertVerificationToken(String username, String token) {
         verificationTokenDao.insertVerificationToken(username,token);

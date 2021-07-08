@@ -12,6 +12,7 @@ public interface InvoiceDao {
     List<Invoice> getAllInvoiceByStatus(int status);
     List<Invoice> getAllInvoiceByStatus(int status,String username);
     List<Invoice> getAllInvoiceByUsername(String username);
+    boolean checkUserPurchase(String username,int productId);
     Double getRevenue();
     Double getRevenueByMonth(String month);
     Double getRevenueMethod(String month,String payMethod);

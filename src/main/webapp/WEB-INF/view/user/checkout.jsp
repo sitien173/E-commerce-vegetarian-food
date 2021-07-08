@@ -114,7 +114,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="col-12">
-                                                <img width="200px" height="100px" src="">
+                                                <img width="200px" height="100px" src="<c:url value="/disk/resources/img/upload/paypal-avatar.png"/>">
                                                 <label class="text-info">Accepted Cards</label>
                                                 <div class="d-flex">
                                                     <i class="fab fa-cc-visa" style="color:navy;"></i>

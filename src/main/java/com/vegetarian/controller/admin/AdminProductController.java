@@ -27,6 +27,8 @@ public class AdminProductController {
     private ProductService productService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private FileService fileService;
 
     @GetMapping("/list")
     private String showViewProduct(){
@@ -64,7 +66,7 @@ public class AdminProductController {
         if(result.hasErrors()) return "admin/product_add";
         List<Image> imageList = new ArrayList<>();
         for(MultipartFile file : files){
-            FileService.save(file);
+            fileService.save(file);
             imageList.add(new Image("/disk/resources/img/upload/"+file.getOriginalFilename()));
         }
         product.setImages(imageList);
@@ -85,7 +87,7 @@ public class AdminProductController {
         if(result.hasErrors()) return "admin/product_edit";
         List<Image> imageList = new ArrayList<>();
         for(MultipartFile file : files){
-            FileService.save(file);
+            fileService.save(file);
             imageList.add(new Image("/disk/resources/img/upload/"+file.getOriginalFilename()));
         }
         product.setImages(imageList);
