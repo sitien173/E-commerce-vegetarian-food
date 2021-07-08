@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-    <title>Đăng ký</title>
+    <title>Đăng nhập</title>
     <c:import url="../inc/headUser.jsp"/>
     <!--
     -->

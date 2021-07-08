@@ -114,6 +114,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    public List<Invoice> getAllRevenueByMonth(String month) {
+        return invoiceDao.getAllRevenueByMonth(month);
+    }
+
+    @Override
     public List<Invoice> getTop10() {
         return invoiceDao.getTop10();
     }

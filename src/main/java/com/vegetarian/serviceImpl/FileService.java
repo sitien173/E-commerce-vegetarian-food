@@ -17,14 +17,11 @@ import java.util.Objects;
 public class FileService {
     @Autowired
     private ServletContext servletContext;
-    private static String rootDir;
-    @PostConstruct
-    public void init(){
-        rootDir = servletContext.getRealPath("/disk\\resources\\img\\upload\\");
-    }
+
     public void save(MultipartFile file) {
         if(!file.isEmpty()){
             try {
+                String rootDir = servletContext.getResource("/disk\\resources\\img\\upload\\").getPath();
                 file.transferTo(new File(rootDir,file.getOriginalFilename()));
             } catch (IOException e) {
                 e.getMessage();

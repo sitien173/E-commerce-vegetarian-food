@@ -102,7 +102,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public boolean delete(int id) {
        String SQL = "delete from [product] where id=?";
-       return jdbcTemplate.update(SQL,new Object[]{id}) > 0;
+       return jdbcTemplate.update(SQL, id) > 0;
     }
 
     @Override

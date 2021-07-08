@@ -22,6 +22,7 @@ public interface InvoiceService {
     Double getRevenueByMonth(String month);
     Double getRevenueMethod(String month,String payMethod);
     Double getRevenueMethod(String payMethod);
+    List<Invoice> getAllRevenueByMonth(String month);
     List<Invoice> getTop10();
     LinkedHashMap<String,Double> getTotalMoneyUsers();
     List<Invoice> getTop10Recently();

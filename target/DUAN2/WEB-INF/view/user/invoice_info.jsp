@@ -94,15 +94,20 @@
                             <div class="input-group">
                                 <div class="form-outline">
                                     <label for="search-order">Tra cứu đơn hàng của bạn</label>
-                                    <input type="search" id="search-order"  placeholder="Nhập mã đơn hàng" class="form-control"/>
-                                    <span id="search-error" style="display: none;color:red;">ĐƠn hàng không có. Vui lòng nhập đúng</span>
+                                   <form id="search-form">
+                                       <div class="d-flex justify-content-center">
+                                           <input type="search" id="search-order"  placeholder="Nhập mã đơn hàng" class="form-control"/>
+                                           <button class="btn btn-aqua" type="submit">Tìm kiếm</button>
+                                       </div>
+                                       <span id="search-error" style="display: none;color:red;">ĐƠn hàng không có. Vui lòng nhập đúng</span>
+                                   </form>
                                 </div>
                             </div>
                         </div>
                         <table class="table table-responsive table-borderless table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Order</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Total</th>
@@ -119,7 +124,7 @@
                             <table class="table table-responsive table-borderless table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Order</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Total</th>
@@ -128,7 +133,6 @@
                                 </thead>
                                 <tbody id="nav-all-body">
                                 </tbody>
-                                <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('all')" class="btn btn-success">Show More</span></td></tr></tfoot>
 
                             </table>
                         </div>
@@ -137,7 +141,7 @@
                         <table class="table table-responsive table-borderless table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Order</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Total</th>
@@ -147,7 +151,6 @@
                             <tbody id="nav-wait-confirm-body">
 
                             </tbody>
-                            <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('wait-confirm')" class="btn btn-success">Show More</span></td></tr></tfoot>
 
                         </table>
                     </div></div>
@@ -155,7 +158,7 @@
                         <table class="table table-responsive table-borderless table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Order</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Total</th>
@@ -165,7 +168,6 @@
                             <tbody id="nav-confirm-body">
 
                             </tbody>
-                            <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('confirm')" class="btn btn-success">Show More</span></td></tr></tfoot>
 
                         </table>
                     </div></div>
@@ -173,7 +175,7 @@
                         <table class="table table-responsive table-borderless table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Order</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Total</th>
@@ -182,7 +184,6 @@
                             <tbody id="nav-delivering-body">
 
                             </tbody>
-                            <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('delivering')" class="btn btn-success">Show More</span></td></tr></tfoot>
 
                         </table>
                     </div></div>
@@ -191,7 +192,7 @@
                             <table class="table table-responsive table-borderless table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Order</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Total</th>
@@ -199,7 +200,6 @@
                                 </thead>
                                 <tbody id="nav-delivered-body">
                                 </tbody>
-                                <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('delivered')" class="btn btn-success">Show More</span></td></tr></tfoot>
                             </table>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                             <table class="table table-responsive table-borderless table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Order</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Total</th>
@@ -217,7 +217,6 @@
                                 </thead>
                                 <tbody id="nav-confirm-cancel-body">
                                 </tbody>
-                                <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('confirm-cancel')" class="btn btn-success">Show More</span></td></tr></tfoot>
                             </table>
                         </div>
                     </div>
@@ -226,7 +225,7 @@
                             <table class="table table-responsive table-borderless table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Order</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Total</th>
@@ -234,7 +233,6 @@
                                 </thead>
                                 <tbody id="nav-cancel-body">
                                 </tbody>
-                                <tfoot><tr><td><span type="cursor: pointer" onclick="showMore('cancel')" class="btn btn-success">Show More</span></td></tr></tfoot>
                             </table>
                         </div>
                     </div>

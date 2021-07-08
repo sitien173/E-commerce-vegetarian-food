@@ -115,13 +115,20 @@
                 <span class="menu-title">Invoice</span>
             </a>
         </li>
-
         <li class="nav-item menu-items">
             <a class="nav-link" href="<c:url value="/admin/feedback/list"/>">
               <span class="menu-icon">
                <i class="fas fa-comment-alt"></i>
               </span>
                 <span class="menu-title">Feedback</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="<c:url value="/admin/statistical"/>">
+              <span class="menu-icon">
+               <i class="fas fa-comment-alt"></i>
+              </span>
+                <span class="menu-title">Thống kê</span>
             </a>
         </li>
     </ul>

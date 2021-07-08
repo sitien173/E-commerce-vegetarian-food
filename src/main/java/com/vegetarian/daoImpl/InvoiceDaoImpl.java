@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -164,6 +165,18 @@ public class InvoiceDaoImpl implements InvoiceDao {
                 "FROM dbo.[invoice]\n" +
                 "WHERE pay_method = ? and status = 3";
         return jdbcTemplate.queryForObject(SQL,new Object[]{payMethod},Double.class);
+    }
+
+    @Override
+    public List<Invoice> getAllRevenueByMonth(String month) {
+        String SQL = "SELECT * FROM dbo.[invoice] \n" +
+                "WHERE DATENAME(month, created_at) = ? AND status = 3";
+        try {
+            return jdbcTemplate.query(SQL,new Object[]{month},invoiceMapper);
+        }catch (EmptyResultDataAccessException e){
+            e.getMessage();
+        }
+        return new ArrayList<Invoice>();
     }
 
     @Override

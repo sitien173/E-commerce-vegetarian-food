@@ -25,5 +25,8 @@ public class HomController {
     public String showViewAbout(){
         return "about";
     }
-
+    @GetMapping("/admin/statistical")
+    public String showViewStatistical(){
+        return "admin/statistical";
+    }
 }

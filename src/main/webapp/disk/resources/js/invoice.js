@@ -133,6 +133,66 @@ function getInvoice(url,root){
         })
 }
 document.addEventListener("DOMContentLoaded",function () {
+    const searchBody = $('#nav-search-body');
+    $('#search-form').submit(function (event) {
+        const invoiceSearch = $("#search-order").val();
+        fetch(URL + "/user/api/invoice/"+invoiceSearch)
+            .then(checkStatus)
+            .then(convertJson)
+            .then((item) => {
+                let action = '';
+                if(item.status == 0 || item.status == 1) {
+                    action = "<span onclick='updateStatusInvoice(this,4)' value='"+item.id+"' style='cursor: pointer;color:red;font-weight: 600'>HUỶ ĐƠN HÀNG</span>";
+                }else if(item.status == 4){
+                    action = "<span onclick='updateStatusInvoice(this,0)' value='"+item.id+"' style='cursor: pointer;color:red;font-weight: 600'>HOÀN TÁC</span>";
+                }
+                let statusTxt = "";
+                switch (item.status) {
+                    case 0: {
+                        statusTxt = 'Chờ xác nhận';
+                        break;
+                    }
+                    case 1: {
+                        statusTxt = 'Chờ lấy hàng';
+                        break;
+                    }
+                    case 2: {
+                        statusTxt = 'Đang giao';
+                        break;
+                    }
+                    case 3: {
+                        statusTxt = 'Đã giao';
+                        break;
+                    }
+                    case 4: {
+                        statusTxt = 'Đang yêu cầu huỷ đơn hàng';
+                        break;
+                    }
+                    case 5: {
+                        statusTxt = 'Đã huỷ';
+                        break;
+                    }
+                    default: {
+                        statusTxt = 'Không xác định';
+                        break;
+                    }
+                }
+                let createdAt = formatDate(item.createdAt.date.day,item.createdAt.date.month,item.createdAt.date.year,item.createdAt.time.hour,item.createdAt.time.minute,item.createdAt.time.second);
+                searchBody.html('');
+                searchBody.append("<tr>" +
+                    "<td><span style='cursor: pointer;color: #007bff' onclick='showInfoItem("+item.id+")'>"+item.id+"#"+item.user.name+"</span></td>" +
+                    "<td>"+createdAt+"</td>" +
+                    "<td>"+statusTxt+"</td>" +
+                    "<td>"+formatMoney(item.total)+"</td>" +
+                    "<td>"+action+"</td>" +
+                    "</tr>");
+            }).catch(() => {
+                setTimeout( function () {
+                $('#search-error').css('display','block');
+            },1000,$('#search-error').css('display','none'));
+        })
+        event.preventDefault();
+    })
         $navAll.click(function () {
             getInvoice("/user/api/invoice/list",$navAllBody);
         });
@@ -154,4 +214,5 @@ document.addEventListener("DOMContentLoaded",function () {
     $navCancel.click(function () {
         getInvoice("/user/api/invoice/list/5",$navCancelBody);
     });
+
 })

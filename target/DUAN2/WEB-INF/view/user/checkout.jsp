@@ -50,7 +50,7 @@
                             </fieldset>
                             <input type="checkbox" name="admit" /> <span class="h5">Nhận thư và email từ chúng tôi</span>
                             <br>
-                            <button type="button" class="btn btn-outline-success" onclick="location.href='${url}/user/info?id=${order.user.userId}'">Chỉnh sửa thông tin cá nhân</button>
+                            <button type="button" class="btn btn-outline-success" onclick="location.href='<c:url value="/user/edit"/>'">Chỉnh sửa thông tin cá nhân</button>
                         </div>
                     </div>
                 </div>

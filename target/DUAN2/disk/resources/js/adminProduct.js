@@ -8,7 +8,7 @@ function deleteProduct(id) {
         .then(checkStatus)
         .then(() => {
             $('#products').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
-        }).catch(reason => console.log(reason))
+        }).catch(() => {alert("Sản phẩm đang thuộc đơn hàng không thể xoá")})
 }
 function getCategories(root) {
     fetch(URL + "/admin/api/categories/list")
@@ -31,7 +31,6 @@ function initProduct() {
         .then(convertJson)
         .then((data) => {
             var modifierProducts = data.map(item => {
-                console.log(item);
                 return {
                     actions: "<button id='"+item.id+"' onclick='deleteProduct("+item.id+")' class='delete badge badge-outline-danger'><i class='far fa-times-circle'></i></button> &nbsp;&nbsp;" +
                         "<button onclick='editProduct("+item.id+")'  class='badge badge-outline-success'><i class=\"far fa-user-circle\"></i></button>",

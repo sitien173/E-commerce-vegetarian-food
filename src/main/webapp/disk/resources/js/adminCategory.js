@@ -9,7 +9,7 @@ function del(categoryId) {
         .then(() => {
             table.row($('button#'+categoryId+'').parents('tr')).remove().draw();
         })
-        .catch((err) => console.log(err))
+        .catch(() => alert("Không thể xoá danh mục vì có sản phẩm đang liên kết với nó"))
 }
 function initTable(){
     $.get(URL + "/admin/api/categories/list",function (responseData) {
