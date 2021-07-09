@@ -43,8 +43,8 @@ public class FeedbackController {
         feedback.setProduct(productService.getProduct(productId));
         feedback.setRated(rating);
         feedback.setComment(description);
-        if(feedbackService.insert(feedback)) model.addAttribute("messenger","Gửi phản hồi thất bại");
-        else model.addAttribute("messenger","Gửi phản hồi thành công");
+        if(feedbackService.insert(feedback)) model.addAttribute("messenger","Gửi phản hồi thành công");
+        else model.addAttribute("messenger","Gửi phản hồi thất bại");
         return "redirect:/product/" + productId;
     }
 }

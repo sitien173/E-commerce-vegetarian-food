@@ -4,9 +4,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class Category {
     private int id;
-    @NotBlank(message = "Not empty")
+    @NotBlank(message = "Name not is empty")
     private String name;
-    @NotBlank(message = "Not empty")
+    @NotBlank(message = "Slug not is empty")
     private String slug;
 
     public Category() {

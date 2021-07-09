@@ -2,13 +2,15 @@ function editProduct(id) {
     location.href = URL + "/admin/product/edit/"+id+"";
 }
 function deleteProduct(id) {
-    fetch(URL + "/admin/api/product/delete/" + id, {
-        method: 'DELETE',
-    })
-        .then(checkStatus)
-        .then(() => {
-            $('#products').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
-        }).catch(() => {alert("Sản phẩm đang thuộc đơn hàng không thể xoá")})
+    if(confirm("Xác nhận xoá")){
+        fetch(URL + "/admin/api/product/delete/" + id, {
+            method: 'DELETE',
+        })
+            .then(checkStatus)
+            .then(() => {
+                $('#products').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
+            }).catch(() => {alert("Sản phẩm đang thuộc đơn hàng không thể xoá")})
+    }
 }
 function getCategories(root) {
     fetch(URL + "/admin/api/categories/list")
@@ -64,7 +66,7 @@ function initProduct() {
 document.addEventListener("DOMContentLoaded",function () {
     const categories = document.getElementById("categories");
     getCategories(categories);
-    setTimeout(initProduct,1000);
+    setTimeout(initProduct,2000);
    categories.addEventListener("change",function () {
            $('#products').DataTable().clear().destroy();
            initProduct();

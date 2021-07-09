@@ -52,7 +52,7 @@
                                             <label class="col-lg-3 col-form-label">Category</label>
                                             <div class="col-lg-9">
                                                 <form:select path="categories.id" cssClass="form-control">
-                                                    <form:options items="${listCategories}" itemValue="id" itemLabel="name"/>
+
                                                 </form:select>
                                                 <form:errors path="categories.id"/>
                                             </div>
@@ -118,8 +118,23 @@
         </div>
 </div>
 <div class="modal"></div>
+<script src="<c:url value="/disk/resources/js/constants.js"/> "></script>
  <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
 <script>
+    function getCategories(root) {
+        fetch(URL + "/admin/api/categories/list")
+            .then(checkStatus)
+            .then(convertJson)
+            .then((data) => {
+                root.innerHTML = "";
+                data.forEach(item => {
+                    let childNode = document.createElement("option");
+                    childNode.setAttribute("value",item.id);
+                    childNode.innerHTML = item.name;
+                    root.appendChild(childNode);
+                });
+            }).catch(reason => console.log(reason));
+    }
     $body = $("body");
     $(document).on({
         ajaxStart: function () {
@@ -129,6 +144,10 @@
             $body.removeClass("loading");
         }
     });
+    document.addEventListener("DOMContentLoaded",function () {
+        const categories = document.getElementById("categories.id");
+        getCategories(categories);
+    })
 </script>
 </body>
 </html>

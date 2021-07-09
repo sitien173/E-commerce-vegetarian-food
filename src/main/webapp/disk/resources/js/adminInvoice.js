@@ -9,11 +9,13 @@ function appendSelect(id,$root) {
     }
 }
 function deleteInvoice(id) {
-    fetch(URL + "/admin/api/invoice/delete/"+id,{method: 'DELETE'})
-        .then(checkStatus)
-        .then(() => {
-            $('#orders').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
-        }).catch(reason => console.error(reason));
+   if(confirm("Xác nhận xoá")){
+       fetch(URL + "/admin/api/invoice/delete/"+id,{method: 'DELETE'})
+           .then(checkStatus)
+           .then(() => {
+               $('#orders').DataTable().row($('button#'+id+'').parents('tr')).remove().draw();
+           }).catch(() => alert("Không thể xoá đơn hàng"));
+   }
 }
 function updateStatusInvoice(id,$root) {
     stt = $root.value;

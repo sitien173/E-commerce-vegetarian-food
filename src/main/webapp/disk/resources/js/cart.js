@@ -14,11 +14,13 @@ function updateQuantity(productId,quantity) {
         .catch(reason => console.error(reason));
 }
 function deleteItem(productId) {
-    fetch(URL + "/cart/delete/" + productId, {method: "DELETE",})
-        .then(status)
-        .then(() => {
-            showPopup("success","Delete Item","Xoá sản phẩm thành công");
-            $('tr[value="'+productId+'"]').remove();
-        })
-        .catch((err) => console.log(err))
+    if(confirm("Xác nhận xoá")){
+        fetch(URL + "/cart/delete/" + productId, {method: "DELETE",})
+            .then(status)
+            .then(() => {
+                showPopup("success","Delete Item","Xoá sản phẩm thành công");
+                $('tr[value="'+productId+'"]').remove();
+            })
+            .catch(() => alert("Xoá thất bại"));
+    }
 }

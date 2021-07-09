@@ -2,17 +2,20 @@ package com.vegetarian.entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.List;
 
 public class Product {
     private int id;
-    @NotBlank(message = "Name not empty")
+    @NotBlank(message = "Name not is empty")
     private String name;
+    @Min(value = 1000)
     private float price;
     private float salePrice;
     private int sold = 0;
     private boolean isHighlight = false;
+    @Min(1)
     private int quantity;
     private String description;
     private Category categories;

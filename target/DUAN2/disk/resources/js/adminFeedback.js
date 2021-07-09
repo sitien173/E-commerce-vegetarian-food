@@ -34,13 +34,15 @@ function content(statusVal) {
 
 }
 function deleteFeedback(id) {
-    $.ajax({
-        url: URL + '/admin/api/feedback/delete/'+id,
-        method: "DELETE",
-        success: function () {
-            $('#feedback').DataTable().row($('tr#'+id+'')).remove().draw();
-        }
-    })
+    if(confirm("Xác nhận xoá")){
+        $.ajax({
+            url: URL + '/admin/api/feedback/delete/'+id,
+            method: "DELETE",
+            success: function () {
+                $('#feedback').DataTable().row($('tr#'+id+'')).remove().draw();
+            }
+        })
+    }
 }
 function confirmFeedback(id) {
     $.ajax({

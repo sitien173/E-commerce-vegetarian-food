@@ -78,30 +78,7 @@
 <script src="${pageContext.request.contextPath}/disk/resources/js/templatemo.js"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/main.js"></script>
 <script src="<c:url value="/disk/resources/js/slick.min.js"/>"></script>
-<script>
-    $('#slick-track-highlight').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        accessibility: true,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        centerMode: true,
-        speed: 500,
-        cssEase: 'linear',
-    });
-    $('#slick-track-best-seller').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        accessibility: true,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        centerMode: true,
-        speed: 500,
-        cssEase: 'linear',
-    });
-</script>
+
 <!-- End Script -->
 </body>
 

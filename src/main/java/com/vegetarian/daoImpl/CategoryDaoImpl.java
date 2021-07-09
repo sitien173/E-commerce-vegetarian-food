@@ -19,9 +19,13 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public void insert(Category categories) {
-        String SQL = "insert into[categories](name,slug) values(?,?)";
-        Object []inputs = new Object[]{categories.getName(),categories.getSlug()};
-        jdbcTemplate.update(SQL,inputs);
+        try{
+            String SQL = "insert into[categories](name,slug) values(?,?)";
+            Object []inputs = new Object[]{categories.getName(),categories.getSlug()};
+            jdbcTemplate.update(SQL,inputs);
+        }catch (Exception e){
+            e.getMessage();
+        }
     }
 
     @Override

@@ -65,39 +65,49 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean insertUser(User user) {
-        String SQL = "insert into [appUser](username,password,name,avatar,email,phone) " +
-                     "values(?,?,?,?,?,?)";
-        Object[] inputs = new Object[]{
-                user.getUsername(),
-                encoder.encode(user.getPassword()),
-                user.getName(),
-                user.getAvatar(),
-                user.getEmail(),
-                user.getPhone(),
-        };
-       return jdbcTemplate.update(SQL,inputs) > 0;
+        try{
+            String SQL = "insert into [appUser](username,password,name,avatar,email,phone) " +
+                    "values(?,?,?,?,?,?)";
+            Object[] inputs = new Object[]{
+                    user.getUsername(),
+                    encoder.encode(user.getPassword()),
+                    user.getName(),
+                    user.getAvatar(),
+                    user.getEmail(),
+                    user.getPhone(),
+            };
+           return jdbcTemplate.update(SQL,inputs) > 0;
+        }catch (Exception e){
+            e.getMessage();
+        }
+        return false;
     }
 
     @Override
     public boolean updateUser(User user) {
-        String SQL = "UPDATE [appUser] set password=?," +
-                "name=?," +
-                "avatar=?," +
-                "email=?," +
-                "phone=?," +
-                "isEnable=?," +
-                "created_at=? where username = ?";
-        Object[] inputs = new  Object[]{
-                encoder.encode(user.getPassword()),
-                user.getName(),
-                user.getAvatar(),
-                user.getEmail(),
-                user.getPhone(),
-                user.isEnabled(),
-                user.getCreatedAt(),
-                user.getUsername()
-        };
-        return jdbcTemplate.update(SQL,inputs) > 0;
+        try{
+            String SQL = "UPDATE [appUser] set password=?," +
+                    "name=?," +
+                    "avatar=?," +
+                    "email=?," +
+                    "phone=?," +
+                    "isEnable=?," +
+                    "created_at=? where username = ?";
+            Object[] inputs = new  Object[]{
+                    encoder.encode(user.getPassword()),
+                    user.getName(),
+                    user.getAvatar(),
+                    user.getEmail(),
+                    user.getPhone(),
+                    user.isEnabled(),
+                    user.getCreatedAt(),
+                    user.getUsername()
+            };
+            return jdbcTemplate.update(SQL,inputs) > 0;
+        }catch (Exception e){
+            e.getMessage();
+        }
+        return false;
     }
 
     @Override

@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByPhone(String phone) {
+        return userDao.getUserByPhone(phone);
+    }
+
+    @Override
     public User getUserByeEmail(String email) {
         return userDao.getUserByEmailL(email);
     }

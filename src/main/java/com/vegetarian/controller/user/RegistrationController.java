@@ -59,6 +59,12 @@ public class RegistrationController {
                                 Model model) throws SQLException{
         if(result.hasErrors()){
             return "user/registration";
+        }else if(userService.getUserByeEmail(user.getEmail()) != null){
+            result.rejectValue("email","error","Email da ton tai");
+            return "user/registration";
+        }else if(userService.getUserByPhone(user.getPhone()) != null){
+            result.rejectValue("phone","error","SDT da ton tai");
+            return "user/registration";
         }
         fileService.save(file);
         Set<SimpleGrantedAuthority> authorizes = new HashSet<>();

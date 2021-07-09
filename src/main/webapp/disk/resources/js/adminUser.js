@@ -1,12 +1,14 @@
 var table;
 function deleteUser(username) {
-    fetch(URL + "/admin/api/user/delete/" + username, {
-        method: 'DELETE',
-    }).then(checkStatus)
-        .then(() => {
-            table.row($('button#'+username+'').parents('tr')).remove().draw();
-        })
-        .catch((err) => console.error(err));
+    if(confirm("Xác nhận xoá")){
+        fetch(URL + "/admin/api/user/delete/" + username, {
+            method: 'DELETE',
+        }).then(checkStatus)
+            .then(() => {
+                table.row($('button#'+username+'').parents('tr')).remove().draw();
+            })
+            .catch(() => alert("Không thể xoá bởi vì đang có đơn hàng của người dùng này"));
+    }
 }
 function editUser(username) {
     location.href = URL + "/admin/user/edit/" + username;

@@ -35,7 +35,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Name</label>
                                             <div class="col-sm-9">
-                                                <form:input path="name" id="name" cssClass="form-control" placeholder="Enter Your Name" />
+                                                <form:input path="name" id="name" required="required" cssClass="form-control" placeholder="Enter Your Name" />
                                                 <small class="form-text text-muted"><form:errors  cssClass="error" path="name"/></small>
                                             </div>
                                         </div>
@@ -44,7 +44,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Avatar  <img src="<c:url value="${user.avatar}"/>" class="img-xs rounded-circle"/></label>
                                             <div class="col-sm-9">
-                                                <input accept="image/*" type="file" name="avt" class="form-control" value="<c:url value="${user.avatar}"/>" placeholder="Update Avatar"/>
+                                                <input accept="image/*" type="file" name="avt" class="form-control" placeholder="Update Avatar"/>
                                             </div>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Phone</label>
                                             <div class="col-sm-9">
-                                                <form:input path="phone" id="tel" cssClass="form-control" placeholder="Enter Your Phone" />
+                                                <form:input path="phone" required="required"  id="tel" cssClass="form-control" placeholder="Enter Your Phone" />
                                                 <small class="form-text text-muted"><form:errors cssClass="error" path="phone"/></small>
                                             </div>
                                         </div>
@@ -110,9 +110,8 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Password</label>
                                             <div class="col-sm-9">
-                                                <form:password path="password" class="form-control"  placeholder="Enter Password"/>
+                                                <form:password path="password" required="required" class="form-control" value="${user.password}" placeholder="Enter Password"/>
                                                 <hr>
-                                                <input type="password" class="form-control" placeholder="RePassword" id="rePassword" name="rePassword"/>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +121,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Địa chỉ</label>
                                             <div class="col-sm-9">
-                                                <form:textarea path="address.addr" cssClass="form-control" placeHolder="Địa chỉ nhà của bạn"/>
+                                                <form:textarea required="required" path="address.addr" cssClass="form-control" value="${user.address.addr}" placeHolder="Địa chỉ nhà của bạn"/>
                                                 <form:errors path="address.addr"/>
                                             </div>
                                         </div>
@@ -134,7 +133,7 @@
                                             <label class="col-sm-3 col-form-label">Role</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="role">
-                                                    <option value="ROLE_USER">USER</option>
+                                                    <option selected="selected" value="ROLE_USER">USER</option>
                                                     <option value="ROLE_ADMIN">ADMIN</option>
                                                 </select>
                                             </div>
@@ -152,7 +151,8 @@
         </div>
     </div>
 </div>
+<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
-<script src="<c:url value="/disk/resources/js/Address.js"/>"></script>
+<script src="<c:url value="/disk/resources/js/adminUserEdit.js"/>"></script>
 </body>
 </html>

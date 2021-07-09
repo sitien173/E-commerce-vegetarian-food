@@ -39,7 +39,6 @@ public class AdminProductController {
     private String showViewAddProduct(Model model){
         if(!model.containsAttribute("product")){
             model.addAttribute("product",new Product());
-            model.addAttribute("listCategories",categoryService.getAllCategory());
         }
         return "admin/product_add";
     }

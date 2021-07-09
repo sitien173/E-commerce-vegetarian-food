@@ -3,13 +3,15 @@ function edit(categoryId) {
     location.href = URL + "/admin/categories/edit/" + categoryId;
 }
 function del(categoryId) {
-    fetch(URL + "/admin/api/categories/delete/" + categoryId, {
-        method: "DELETE",
-    }).then(checkStatus)
-        .then(() => {
-            table.row($('button#'+categoryId+'').parents('tr')).remove().draw();
-        })
-        .catch(() => alert("Không thể xoá danh mục vì có sản phẩm đang liên kết với nó"))
+    if(confirm("Xác nhận xoá")){
+        fetch(URL + "/admin/api/categories/delete/" + categoryId, {
+            method: "DELETE",
+        }).then(checkStatus)
+            .then(() => {
+                table.row($('button#'+categoryId+'').parents('tr')).remove().draw();
+            })
+            .catch(() => alert("Không thể xoá danh mục vì có sản phẩm đang liên kết với nó"))
+    }
 }
 function initTable(){
     $.get(URL + "/admin/api/categories/list",function (responseData) {

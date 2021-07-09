@@ -2,6 +2,7 @@ package com.vegetarian.ultil;
 
 import com.vegetarian.entity.User;
 import com.vegetarian.service.VerificationTokenService;
+import com.vegetarian.serviceImpl.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
@@ -17,6 +18,8 @@ public class RegistrationListener implements
         ApplicationListener<OnRegistrationCompleteEvent> {
     @Autowired
     private VerificationTokenService verificationTokenService;
+    @Autowired
+    private MailService mailService;
 
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
@@ -27,12 +30,12 @@ public class RegistrationListener implements
         String token = UUID.randomUUID().toString();
         verificationTokenService.insertVerificationToken(user.getUsername(), token);
         String recipientAddress = user.getEmail();
-        String subject = "Registration Confirmation";
+        String subject = "Confirmation Token";
         String confirmationUrl = event.getAppUrl() + event.getRedirectLink() + "?token=" + token;
-        try {
-            EmailUtils.sendMail(recipientAddress,subject,confirmationUrl);
-        } catch (MessagingException | UnsupportedEncodingException e) {
-            e.getMessage();
-        }
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setSubject(subject);
+        email.setText(confirmationUrl);
+        mailService.sendMail(email);
     }
 }

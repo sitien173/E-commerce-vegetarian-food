@@ -23,7 +23,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Registration</h4>
                             <c:url var="action" value="/admin/user/add"/>
-                            <form:form method="post" modelAttribute="user"
+                            <form:form id="form" method="post" modelAttribute="user"
                                        action="${action}" class="form-sample"
                                         enctype="multipart/form-data">
                                 <p class="card-description"> Personal info </p>
@@ -31,19 +31,21 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Name</label>
+                                            <label class="col-sm-3 col-form-label">Username</label>
                                             <div class="col-sm-9">
-                                                <form:input path="name" id="name" cssClass="form-control" placeholder="Enter Your Name" />
-                                                <small class="form-text text-muted"><form:errors  cssClass="error" path="name"/></small>
+                                                <form:input path="username" required="required"  cssClass="form-control" placeholder="Enter Your Username" />
+                                                <small class="form-text text-muted"><form:errors  cssClass="error" path="username"/></small>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Avatar</label>
+                                            <label class="col-sm-3 col-form-label">Name</label>
                                             <div class="col-sm-9">
-                                                <input accept="image/*" type="file" name="avt" class="form-control" placeholder="Update Avatar"/>
+                                                <form:input path="name" required="required"  cssClass="form-control" placeholder="Enter Your Name" />
+                                                <small class="form-text text-muted"><form:errors  cssClass="error" path="name"/></small>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +66,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Email</label>
                                             <div class="col-sm-9">
-                                                <form:input path="email" cssClass="form-control" placeholder="Enter Your Email" />
+                                                <form:input path="email" required="required" cssClass="form-control" placeholder="Enter Your Email" />
                                                 <small class="form-text text-muted"><form:errors cssClass="error" path="email"/></small>
                                             </div>
                                         </div>
@@ -86,7 +88,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Phone</label>
                                             <div class="col-sm-9">
-                                                <form:input path="phone" id="tel" cssClass="form-control" placeholder="Enter Your Phone" />
+                                                <form:input path="phone" required="required"  id="tel" cssClass="form-control" placeholder="Enter Your Phone" />
                                                 <small class="form-text text-muted"><form:errors cssClass="error" path="phone"/></small>
                                             </div>
                                         </div>
@@ -108,9 +110,9 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Password</label>
                                             <div class="col-sm-9">
-                                                <form:password path="password" cssClass="form-control" placeholder="Enter Your Password"/>
+                                                <form:password required="required" path="password" name="password" cssClass="form-control" placeholder="Enter Your Password"/>
                                                 <small  class="form-text text-muted"><form:errors cssClass="error" path="password"/></small>
-                                                <input type="password" class="form-control" name="rePassword"  placeholder="Enter Password Again">
+                                                <form:errors path="password"/>
                                             </div>
                                         </div>
                                     </div>
@@ -120,25 +122,22 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Địa chỉ</label>
                                             <div class="col-sm-9">
-                                                <form:textarea path="address.addr" cssClass="form-control" placeHolder="Địa chỉ nhà của bạn"/>
+                                                <form:textarea required="required" path="address.addr" cssClass="form-control" placeHolder="Địa chỉ nhà của bạn"/>
                                                 <form:errors path="address.addr"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Role</label>
+                                            <label class="col-sm-3 col-form-label">Avatar</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" name="role">
-                                                    <option value="ROLE_USER">USER</option>
-                                                    <option value="ROLE_ADMIN">ADMIN</option>
-                                                </select>
+                                                <input accept="image/*" required="required" type="file" name="avt" class="form-control" placeholder="Update Avatar"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-dark" onclick="window.history.back()">Cancel</button>
-                              <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                              <form:button type="submit" class="btn btn-primary mr-2">Submit</form:button>
                             </form:form>
                         </div>
                     </div>
@@ -147,6 +146,7 @@
         </div>
     </div>
 </div>
+<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/Address.js"/>"></script>
 </body>
