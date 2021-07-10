@@ -7,4 +7,5 @@ import java.util.List;
 public interface AddressDao {
     Address getAddressByUsername(String username);
     void insertAddress(Address address,String username);
+    void updateAddress(Address address,String username);
 }

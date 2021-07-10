@@ -36,4 +36,11 @@ public class AddressDaoImpl implements AddressDao {
         jdbcTemplate.update(SQL,inputs);
     }
 
+    @Override
+    public void updateAddress(Address address, String username) {
+        String SQL  = "update [address] set ward_id = ?,addr = ? where username=?";
+        Object[] inputs = new Object[]{address.getWard().getWardId(),address.getAddr(),username};
+        jdbcTemplate.update(SQL,inputs);
+    }
+
 }

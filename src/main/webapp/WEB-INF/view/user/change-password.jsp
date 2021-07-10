@@ -10,20 +10,25 @@
 <html>
 <head>
     <title>Cập nhật mật khẩu</title>
-   <c:import url="../inc/headUser.jsp"/>
+    <c:import url="../inc/headUser.jsp"/>
 </head>
 <body>
 <c:import url="../inc/header.jsp"/>
 <div class="container" style="margin: 50px">
     <div class="row d-flex justify-content-center">
-        <c:url var="action" value="/user/forgotPassword/updatePassword"/>
+        <c:url var="action" value="/user/change-password"/>
         <h5 class="text-center text-info">Cập nhật mật khẩu mới</h5>
+        <c:out value=" ${info}"/>
         <form id="form" action="${action}" method="post" class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="password">Mật khẩu mới</label>
+                        <label for="password">Mật khẩu cũ</label>
                         <input pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" class="form-control" type="password" name="password" id="password" required placeholder="Nhập mật khẩu mới">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Mật khẩu mới</label>
+                        <input pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" class="form-control" type="password" name="newPassword" id="newPassword" required placeholder="Nhập mật khẩu mới">
                     </div>
                     <div class="form-group">
                         <label for="password">Nhập lại</label>
@@ -46,9 +51,9 @@
 <script src="${pageContext.request.contextPath}/disk/resources/js/validForm.js"></script>
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded",function () {
+    $(document).ready(function () {
         $('#form').submit(function (e) {
-            if($('input[name=password]').val() !== $('input[name=rePassword]').val()){
+            if($('input[name=newPassword]').val() !== $('input[name=rePassword]').val()){
                 alert("Mật khẩu không khớp");
                 e.preventDefault();
             }

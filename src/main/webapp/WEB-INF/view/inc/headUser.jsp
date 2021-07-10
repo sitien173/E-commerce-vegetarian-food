@@ -17,3 +17,4 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
 <script src="<c:url value="/disk/resources/js/formatMoney.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/popup.js"/>"></script>
+<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>

@@ -292,7 +292,7 @@
 <!-- End Footer -->
 
 <!-- Start Script -->
-<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
+
 <script src="<c:url value="/disk/resources/js/productCard.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
 <script src="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"/>"></script>

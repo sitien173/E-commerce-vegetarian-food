@@ -11,6 +11,7 @@ public interface UserDao{
     User getUserByUserName(String username);
     User getUserByPhone(String phone);
     int totalUser();
+    User checkUser(String username,String password);
     boolean insertUser(User user);
     boolean updateUser(User user);
     boolean deleteUser(String username);

@@ -42,7 +42,7 @@
     <!-- End Footer -->
 
     <!-- Start Script -->
-   <script src="${pageContext.request.contextPath}/disk/resources/js/constants.js"></script>
+
     <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="${pageContext.request.contextPath}/disk/resources/js/jquery-migrate-1.2.1.min.js"></script>

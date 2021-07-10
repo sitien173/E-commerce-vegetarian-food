@@ -63,9 +63,13 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceDao.checkUserPurchase(username,productId);
     }
 
+    @Transactional(rollbackFor = SQLException.class)
     @Override
-    public boolean delete(int id) {
-        return invoiceDao.delete(id);
+    public boolean delete(Invoice invoice) {
+        boolean check = false;
+        check = updateQuantityProduct(invoice);
+        if(check) check = invoiceDao.delete(invoice.getId());
+        return check;
     }
 
     @Override

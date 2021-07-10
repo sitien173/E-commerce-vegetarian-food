@@ -23,13 +23,16 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Registration</h4>
+                            <span class="text-danger"><c:out value="${info}"/></span>
                             <form:form method="post" modelAttribute="user"
                                        action="${pageContext.request.contextPath}/admin/user/update" class="form-sample"
                                         enctype="multipart/form-data">
-
                                 <p class="card-description"> Personal info </p>
                                 <form:hidden path="avatar"/>
                                 <form:hidden path="username"/>
+                                <form:hidden path="email"/>
+                                <form:hidden path="phone"/>
+                                <form:hidden path="password"/>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
@@ -45,6 +48,7 @@
                                             <label class="col-sm-3 col-form-label">Avatar  <img src="<c:url value="${user.avatar}"/>" class="img-xs rounded-circle"/></label>
                                             <div class="col-sm-9">
                                                 <input accept="image/*" type="file" name="avt" class="form-control" placeholder="Update Avatar"/>
+                                                <img class="img-thumbnail rounded-circle" style="width: 50px;height: 50px" src="<c:url value="${user.avatar}"/>"/>
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +70,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Email</label>
                                             <div class="col-sm-9">
-                                                <form:input path="email" cssClass="form-control" placeholder="Enter Your Email" />
+                                                <input type="email" value="${user.email}" name="mail" class="form-control" placeholder="Enter Your Email" />
                                                 <small class="form-text text-muted"><form:errors cssClass="error" path="email"/></small>
                                             </div>
                                         </div>
@@ -88,7 +92,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Phone</label>
                                             <div class="col-sm-9">
-                                                <form:input path="phone" required="required"  id="tel" cssClass="form-control" placeholder="Enter Your Phone" />
+                                                <input type="text" value="${user.phone}" name="sdt" required="required"  Class="form-control" placeholder="Enter Your Phone" />
                                                 <small class="form-text text-muted"><form:errors cssClass="error" path="phone"/></small>
                                             </div>
                                         </div>
@@ -110,7 +114,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Password</label>
                                             <div class="col-sm-9">
-                                                <form:password path="password" required="required" class="form-control" value="${user.password}" placeholder="Enter Password"/>
+                                                <input type="password" name="pass" class="form-control" placeholder="Enter Password"/>
                                                 <hr>
                                             </div>
                                         </div>
@@ -126,16 +130,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Role</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" name="role">
-                                                    <option selected="selected" value="ROLE_USER">USER</option>
-                                                    <option value="ROLE_ADMIN">ADMIN</option>
-                                                </select>
+                                            <label class="col-sm-3 col-form-label">Trạng thái</label>
+                                            <div class="col-sm-2">
+                                                <input type="checkbox" value="${user.enabled}" class="form-check-input" name="ena">
                                             </div>
                                         </div>
                                     </div>

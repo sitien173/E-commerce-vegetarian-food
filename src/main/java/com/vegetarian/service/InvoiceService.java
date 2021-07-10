@@ -13,7 +13,7 @@ public interface InvoiceService {
     List<Invoice> getAllInvoiceByUsername(String username);
     boolean updateStatus(int status,int invoiceId);
     Invoice getInvoice(int invoiceId);
-    boolean delete(int id);
+    boolean delete(Invoice invoice);
     boolean update(Invoice invoice);
     boolean updateQuantityProduct(Invoice invoice);
     boolean checkUserPurchase(String username,int productId);

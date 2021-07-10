@@ -118,7 +118,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
     public boolean checkUserPurchase(String username,int productId) {
         String SQL = " SELECT count(*)\n" +
                 "  FROM [appUser] a\n" +
-                "  LEFT JOIN invoice i\n" +
+                "  RIGHT JOIN invoice i\n" +
                 "  ON a.username = i.username WHERE a.username = ? \n" +
                 "  and EXISTS(SELECT * FROM [item] it LEFT JOIN product p ON it.product_id = p.id WHERE p.id = ?)";
         try{

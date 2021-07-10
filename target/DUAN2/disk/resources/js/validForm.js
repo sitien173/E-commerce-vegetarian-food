@@ -3,6 +3,7 @@ function isValid(){
     let check = true;
     for(let item of arr){
         check = item.length !== 0;
+        if(item.name == 'avt') check = true;
     }
     return check;
 }

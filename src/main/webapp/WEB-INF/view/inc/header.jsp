@@ -74,6 +74,7 @@
                         <div class="dropdown-menu" aria-labelledby="account">
                             <a class="dropdown-item" href="<c:url value="/user/invoice/info"/>">Lịch sử mua hàng</a>
                             <a class="dropdown-item" href="<c:url value="/user/edit"/> ">Sửa thông tin</a>
+                            <a class="dropdown-item" href="<c:url value="/user/change-password"/> ">Đổi mật khẩu</a>
                             <a class="dropdown-item" href="<c:url value="/logout"/>">Đăng xuất</a>
                         </div>
                     </div>

@@ -11,6 +11,7 @@ public interface UserService extends UserDetailsService {
     User getUserByPhone(String phone);
     User getUserByeEmail(String email);
     boolean updateUser(User user);
+    User checkUser(String username,String password);
     boolean deleteUser(String username);
     List<User> getAllUser();
     int totalUser();

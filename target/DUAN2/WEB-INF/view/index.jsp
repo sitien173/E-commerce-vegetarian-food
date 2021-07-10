@@ -115,7 +115,6 @@
     <!-- End Footer -->
     
     <!-- Start Script -->
-    <script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
     <script src="<c:url value="/disk/resources/js/formatMoney.js"/>"></script>
     <script src="<c:url value="/disk/resources/js/productCard.js"/>"></script>
     <script src="<c:url value="/disk/resources/js/home.js"/>"></script>

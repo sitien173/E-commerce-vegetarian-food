@@ -2,11 +2,13 @@ package com.vegetarian.controller.admin;
 
 import com.vegetarian.entity.User;
 import com.vegetarian.service.UserService;
+import com.vegetarian.service.WardService;
 import com.vegetarian.serviceImpl.FileService;
 import com.vegetarian.ultil.OnRegistrationCompleteEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +27,10 @@ public class AdminUserController {
     private UserService userService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private WardService wardService;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
     @GetMapping("/list")
     public String showViewUser(){
         return "admin/user_list";
@@ -52,18 +58,20 @@ public class AdminUserController {
                                 Model model) throws SQLException {
         if(result.hasErrors()){
             return "admin/user_add";
-        }else if(userService.getUserByeEmail(user.getEmail()) != null){
+        } else if(userService.getUserByeEmail(user.getEmail()) != null){
             result.rejectValue("email","error","Email da ton tai");
             return "admin/user_add";
         }else if(userService.getUserByPhone(user.getPhone()) != null){
             result.rejectValue("phone","error","SDT da ton tai");
             return "admin/user_add";
         }
-        fileService.save(file);
+        if(!file.isEmpty()){
+            fileService.save(file);
+            user.setAvatar("/disk/resources/img/upload/" + file.getOriginalFilename());
+        }
         Set<SimpleGrantedAuthority> authorizes = new HashSet<>();
         authorizes.add(new SimpleGrantedAuthority("ROLE_USER"));
         user.setGrantedAuthorities(authorizes);
-        user.setAvatar("/disk/resources/img/upload/" + file.getOriginalFilename());
         if(userService.insertUser(user)){
             return "admin/user_list";
         }
@@ -71,22 +79,37 @@ public class AdminUserController {
         return "admin/user_add";
     }
 
-    @RequestMapping(value = "/edit",
+    @RequestMapping(value = "/update",
                     method = RequestMethod.POST,
                     produces = "text/plain;charset=UTF-8")
     public String editForm(@Valid @ModelAttribute("user") User user,
                            BindingResult result,
-                           @RequestParam(value = "avt",required = false) MultipartFile file,
-                           @RequestParam("role") String role,
+                           @RequestParam("sdt") String phone,
+                           @RequestParam("mail") String email,
+                           @RequestParam("ena") boolean ena,
+                           @RequestParam("pass") String pass,
+                           @RequestParam(value = "avt") MultipartFile file,
                            Model model){
+        user.getAddress().setWard(wardService.getWard(user.getAddress().getWard().getWardId()));
         if(result.hasErrors()){
             return "admin/user_edit";
+        }else if(!user.getEmail().equals(email)){
+            if(userService.getUserByeEmail(email) != null) {
+                user.setEmail(email);
+                result.rejectValue("email", "error", "Email da ton tai");
+                return "admin/user_edit";
+            }
+        }else if(!user.getPhone().equals(phone)){
+            if(userService.getUserByPhone(phone) != null) {
+                user.setPhone(phone);
+                result.rejectValue("phone", "error", "SDT da ton tai");
+                return "admin/user_edit";}
+        }else if(!file.isEmpty() && !user.getAvatar().endsWith(file.getOriginalFilename())){
+            fileService.save(file);
+            user.setAvatar("/disk/resources/img/upload/" + file.getOriginalFilename());
         }
-        fileService.save(file);
-        Set<SimpleGrantedAuthority> authorizes = new HashSet<>();
-        authorizes.add(new SimpleGrantedAuthority(role));
-        user.setGrantedAuthorities(authorizes);
-        user.setAvatar("/disk/resources/img/upload/" + file.getOriginalFilename());
+        user.setEnable(ena);
+        user.setPassword(encoder.encode(user.getPassword()));
         if(userService.updateUser(user)){
             model.addAttribute("info","update success");
         }else model.addAttribute("info","update failed");

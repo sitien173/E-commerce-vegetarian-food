@@ -39,7 +39,9 @@ public class AdminInvoiceManager {
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteInvoice(@PathVariable("id") int id){
-        if(invoiceService.delete(id)) return ResponseEntity.ok().build();
+        Invoice invoice = invoiceService.getInvoice(id);
+        invoice.setStatus(5);
+        if(invoiceService.delete(invoice)) return ResponseEntity.ok().build();
         else return ResponseEntity.badRequest().build();
     }
     @GetMapping("/total")

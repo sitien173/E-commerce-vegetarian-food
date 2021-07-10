@@ -45,7 +45,6 @@
 <!-- End Footer -->
 
 <!-- Start Script -->
-<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
 <script src="<c:url value="/disk/resources/js/Address.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>

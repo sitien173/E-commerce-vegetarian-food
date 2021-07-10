@@ -79,12 +79,9 @@ public class PaypalServiceImpl implements PayPalService {
     @Override
     public Payer getPayerInfo(com.vegetarian.entity.Invoice invoice) {
         Payer payer = new Payer();
-        String []fullName = invoice.getUser().getName().split(" ",3);
         payer.setPaymentMethod(invoice.getPayMethod());
         PayerInfo payerInfo = new PayerInfo();
-        payerInfo.setFirstName(fullName[0])
-                .setMiddleName(fullName[1])
-                .setLastName(fullName[2])
+        payerInfo.setLastName(invoice.getUser().getName())
                 .setEmail(invoice.getUser().getEmail());
         payer.setPayerInfo(payerInfo);
         return payer;

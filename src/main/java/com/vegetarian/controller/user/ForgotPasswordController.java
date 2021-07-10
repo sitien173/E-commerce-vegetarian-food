@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ public class ForgotPasswordController {
     private UserService userService;
     @Autowired
     private VerificationTokenService verificationTokenService;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     private String getAppUrl(HttpServletRequest request){
         return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
@@ -78,10 +81,12 @@ public class ForgotPasswordController {
         User user = verificationToken.getUser();
         verificationTokenService.deleteVerificationToken(verificationToken.getId(),verificationToken.getUser().getUsername());
         if(user != null){
-            user.setPassword(password);
-            userService.updateUser(user);
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            user.setPassword(passwordEncoder.encode(password));
+            user.setEnable(true);
+            if(userService.updateUser(user)){
+                Authentication authentication = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }else return "user/update-password";
         return "redirect:/index";
     }

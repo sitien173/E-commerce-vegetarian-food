@@ -247,7 +247,6 @@
 
 <!-- Start Script -->
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
-<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/formatMoney.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/invoice.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery-migrate-1.2.1.min.js"></script>

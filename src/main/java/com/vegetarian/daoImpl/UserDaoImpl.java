@@ -84,6 +84,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User checkUser(String username, String password) {
+      try{
+          String SQL = "select * from [appUser] where username = ? and password = ?";
+          Object[] inputs = new Object[]{username,password};
+          return jdbcTemplate.queryForObject(SQL,inputs,userMapper);
+      }catch (EmptyResultDataAccessException | NullPointerException e){
+          return null;
+      }
+    }
+
+    @Override
     public boolean updateUser(User user) {
         try{
             String SQL = "UPDATE [appUser] set password=?," +
@@ -94,7 +105,7 @@ public class UserDaoImpl implements UserDao {
                     "isEnable=?," +
                     "created_at=? where username = ?";
             Object[] inputs = new  Object[]{
-                    encoder.encode(user.getPassword()),
+                    user.getPassword(),
                     user.getName(),
                     user.getAvatar(),
                     user.getEmail(),

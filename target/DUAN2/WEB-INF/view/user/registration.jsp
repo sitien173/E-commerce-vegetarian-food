@@ -26,12 +26,12 @@
                         <div class="row">
                             <div class="col-6 form-group">
                                 <label for="name">Họ và Tên</label>
-                                <form:input cssClass="form-control" required="required" path="name" id="name" placeholder="Name"/>
+                                <form:input  cssClass="form-control" required="required" path="name" id="name" placeholder="Name"/>
                                 <form:errors path="name"/>
                             </div>
                             <div class="col-6 form-group">
                                 <label for="username">Tên Đăng Nhập</label>
-                                <form:input cssClass="form-control" path="username" required="required" type="text"  id="username" placeholder="User Name"/>
+                                <form:input  cssClass="form-control" path="username" required="required" type="text"  id="username" placeholder="User Name"/>
                                 <form:errors path="username"/>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-6 form-group">
                                 <label for="phone">Số Điện Thoại</label>
-                                <form:input cssClass="form-control" path="phone" required="required" type="tel"  id="phone" placeholder="Phone"/>
+                                <form:input pattern="[0-9]{10}" cssClass="form-control" path="phone" required="required" type="tel"  id="phone" placeholder="Phone"/>
                                 <form:errors path="phone"/>
                             </div>
                         </div>
@@ -119,7 +119,6 @@
 <!-- End Footer -->
 
 <!-- Start Script -->
-<script src="<c:url value="/disk/resources/js/constants.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
 <script src="<c:url value="/disk/resources/js/Address.js"/>"></script>
 <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>

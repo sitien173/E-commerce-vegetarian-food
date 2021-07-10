@@ -17,10 +17,13 @@
        <div class="col-9" align="center">
            <c:out value="${info}"/>
            <c:url value="/user/update" var="action"/>
-           <form:form modelAttribute="user" method="post" action="${action}" cssStyle="margin: 30px" enctype="multipart/form-data">
+           <form:form id="form" modelAttribute="user" method="post" action="${action}" cssStyle="margin: 30px" enctype="multipart/form-data">
                <form:hidden path="username"/>
                <form:hidden path="avatar"/>
                <form:hidden path="enabled"/>
+               <form:hidden path="email"/>
+               <form:hidden path="phone"/>
+               <form:hidden path="password"/>
                <form:hidden path="accountNonExpired"/>
                <form:hidden path="credentialsNonExpired"/>
                <form:hidden path="createdAt"/>
@@ -32,18 +35,20 @@
                   </div>
                   <div class="col-6">
                       <label for="phone">Số điện thoại</label>
-                      <form:input path="phone" cssClass="form-control"/>
+                      <input class="form-control" name="sdt" type="text"  required value="${user.phone}"/>
+                      <form:errors path="phone"/>
                   </div>
               </div>
                <div class="row">
                    <div class="col-6">
                        <lable for="email">Email</lable>
-                       <form:input path="email" cssClass="form-control"/>
+                       <input class="form-control" name="mail" required value="${user.email}" type="email"/>
                        <form:errors path="email"/>
                    </div>
                    <div class="col-6">
                        <label for="avt">Avatar</label>
                         <input type="file" accept="/image/*" id="avt" name="avt">
+                       <img class="img-thumbnail rounded-circle" style="width: 50px;height: 50px" src="<c:url value="${user.avatar}"/>"/>
                    </div>
                </div>
                <div class="row">
@@ -76,12 +81,12 @@
                <div class="row">
                    <div class="col-6">
                        <label for="password">Mật khẩu</label>
-                       <form:password path="password" cssClass="form-control" value="${user.password}"/>
+                       <input required="required" type="password"  name="pass" class="form-control"/>
                        <form:errors path="password"/>
                    </div>
                    <div class="col-6">
                        <label for="rePassword">Nhập lại mật khẩu</label>
-                       <input type="password" class="form-control" name="rePassword" id="rePassword" value="${user.password}"/>
+                       <input required="required" type="password" class="form-control" name="rePassword" id="rePassword"/>
                    </div>
                </div>
                <div class="row" style="margin: 20px">
@@ -101,7 +106,7 @@
 <!-- End Footer -->
 
 <!-- Start Script -->
-<script src="<c:url value="/disk/resources/js/Address.js"/>"></script>
+<script src="<c:url value="/disk/resources/js/adminUserEdit.js"/>"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/jquery-migrate-1.2.1.min.js"></script>
@@ -111,5 +116,12 @@
 <script src="<c:url value="/disk/resources/js/validForm.js"/>"></script>
 <!-- End Script -->
 </body>
-
+<script>
+    $('#form').submit(function (e) {
+        if($('input[name=pass]').val() !== $('input[name=rePassword]').val()){
+            alert("Mật khẩu không khớp");
+            e.preventDefault();
+        }
+    })
+</script>
 </html>

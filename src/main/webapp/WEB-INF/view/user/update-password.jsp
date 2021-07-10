@@ -18,7 +18,7 @@
     <div class="row d-flex justify-content-center">
         <c:url var="action" value="/user/forgotPassword/updatePassword"/>
         <h5 class="text-center text-info">Cập nhật mật khẩu mới</h5>
-        <form action="${action}" method="post" class="container">
+        <form id="form" action="${action}" method="post" class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-4">
                     <div class="form-group">
@@ -45,4 +45,14 @@
 <script src="${pageContext.request.contextPath}/disk/resources/js/main.js"></script>
 <script src="${pageContext.request.contextPath}/disk/resources/js/validForm.js"></script>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded",function () {
+        $('#form').submit(function (e) {
+            if($('input[name=password]').val() !== $('input[name=rePassword]').val()){
+                alert("Mật khẩu không khớp");
+                e.preventDefault();
+            }
+        })
+    })
+</script>
 </html>

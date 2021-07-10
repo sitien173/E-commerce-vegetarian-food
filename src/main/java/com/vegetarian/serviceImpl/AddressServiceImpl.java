@@ -22,4 +22,9 @@ public class AddressServiceImpl implements AddressService {
     public void insertAddress(Address address, String username) {
         addressDao.insertAddress(address,username);
     }
+
+    @Override
+    public void updateAddress(Address address, String username) {
+        addressDao.updateAddress(address,username);
+    }
 }

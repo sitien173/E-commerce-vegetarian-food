@@ -77,6 +77,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User checkUser(String username, String password) {
+        return userDao.checkUser(username,password);
+    }
+
+    @Override
     public int totalUser() {
         return userDao.totalUser();
     }
