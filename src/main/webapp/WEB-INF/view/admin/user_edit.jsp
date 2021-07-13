@@ -33,6 +33,7 @@
                                 <form:hidden path="email"/>
                                 <form:hidden path="phone"/>
                                 <form:hidden path="password"/>
+                                <form:hidden path="createdAt"/>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
@@ -134,7 +135,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Trạng thái</label>
                                             <div class="col-sm-2">
-                                                <input type="checkbox" value="${user.enabled}" class="form-check-input" name="ena">
+                                                <form:checkbox path="enabled" cssClass="form-check-input"/>
                                             </div>
                                         </div>
                                     </div>

@@ -14,6 +14,7 @@ public interface UserDao{
     User checkUser(String username,String password);
     boolean insertUser(User user);
     boolean updateUser(User user);
+    boolean updateUserNotPassword(User user);
     boolean deleteUser(String username);
     int[] insertAuthorizeUser(String username,Set<SimpleGrantedAuthority> grantedAuthorities);
     Set<SimpleGrantedAuthority> getAuthorizesByUserName(String username);

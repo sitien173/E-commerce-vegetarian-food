@@ -95,6 +95,31 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public boolean updateUserNotPassword(User user) {
+        try{
+            String SQL = "UPDATE [appUser] set " +
+                    "name=?," +
+                    "avatar=?," +
+                    "email=?," +
+                    "phone=?," +
+                    "isEnable=?" +
+                    " where username = ?";
+            Object[] inputs = new  Object[]{
+                    user.getName(),
+                    user.getAvatar(),
+                    user.getEmail(),
+                    user.getPhone(),
+                    user.isEnabled(),
+                    user.getUsername()
+            };
+            return jdbcTemplate.update(SQL,inputs) > 0;
+        }catch (Exception e){
+            e.getMessage();
+        }
+        return false;
+    }
+
+    @Override
     public boolean updateUser(User user) {
         try{
             String SQL = "UPDATE [appUser] set password=?," +

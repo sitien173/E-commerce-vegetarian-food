@@ -53,6 +53,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateUserNotPassword(User user) {
+        return userDao.updateUserNotPassword(user);
+    }
+
+    @Override
     public boolean updateUser(User user) {
         return userDao.updateUser(user);
     }

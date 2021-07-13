@@ -140,7 +140,7 @@ CREATE TABLE duan2.dbo.product (
 GO
 
 ALTER TABLE duan2.dbo.product
-ADD CONSTRAINT FK_product_categories FOREIGN KEY (category_id) REFERENCES dbo.categories (id) ON DELETE CASCADE ON UPDATE CASCADE
+ADD CONSTRAINT FK_product_categories FOREIGN KEY (category_id) REFERENCES dbo.categories (id) ON DELETE NO ACTION ON UPDATE CASCADE
 GO
 CREATE TABLE duan2.dbo.image (
   id BIGINT IDENTITY
@@ -186,7 +186,7 @@ CREATE TABLE duan2.dbo.invoice (
 GO
 
 ALTER TABLE duan2.dbo.invoice
-ADD CONSTRAINT FK_invoice_appUser FOREIGN KEY (username) REFERENCES dbo.appUser (username) ON DELETE CASCADE ON UPDATE CASCADE
+ADD CONSTRAINT FK_invoice_appUser FOREIGN KEY (username) REFERENCES dbo.appUser (username) ON DELETE NO ACTION ON UPDATE CASCADE
 GO
 CREATE TABLE duan2.dbo.item (
   product_id INT NOT NULL
@@ -202,7 +202,7 @@ ADD CONSTRAINT FK_item_invoice FOREIGN KEY (invoice_id) REFERENCES dbo.invoice (
 GO
 
 ALTER TABLE duan2.dbo.item
-ADD CONSTRAINT FK_item_product FOREIGN KEY (product_id) REFERENCES dbo.product (id) ON DELETE CASCADE ON UPDATE CASCADE
+ADD CONSTRAINT FK_item_product FOREIGN KEY (product_id) REFERENCES dbo.product (id) ON DELETE NO ACTION ON UPDATE CASCADE
 GO
 
 SET IDENTITY_INSERT duan2.dbo.address ON

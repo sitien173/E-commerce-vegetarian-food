@@ -1,6 +1,7 @@
 package com.vegetarian.controller.admin;
 
 import com.vegetarian.entity.User;
+import com.vegetarian.service.AddressService;
 import com.vegetarian.service.UserService;
 import com.vegetarian.service.WardService;
 import com.vegetarian.serviceImpl.FileService;
@@ -31,6 +32,8 @@ public class AdminUserController {
     private WardService wardService;
     @Autowired
     private BCryptPasswordEncoder encoder;
+    @Autowired
+    private AddressService addressService;
     @GetMapping("/list")
     public String showViewUser(){
         return "admin/user_list";
@@ -86,7 +89,6 @@ public class AdminUserController {
                            BindingResult result,
                            @RequestParam("sdt") String phone,
                            @RequestParam("mail") String email,
-                           @RequestParam("ena") boolean ena,
                            @RequestParam("pass") String pass,
                            @RequestParam(value = "avt") MultipartFile file,
                            Model model){
@@ -108,9 +110,16 @@ public class AdminUserController {
             fileService.save(file);
             user.setAvatar("/disk/resources/img/upload/" + file.getOriginalFilename());
         }
-        user.setEnable(ena);
-        user.setPassword(encoder.encode(user.getPassword()));
-        if(userService.updateUser(user)){
+        user.setEnable(true);
+        if(!pass.isEmpty()){
+            String passEncode = encoder.encode(pass);
+            user.setPassword(passEncode);
+            if(userService.updateUser(user)){
+                addressService.updateAddress(user.getAddress(),user.getUsername());
+                model.addAttribute("info","update success");
+            }else model.addAttribute("info","update failed");
+        }else if(userService.updateUserNotPassword(user)){
+            addressService.updateAddress(user.getAddress(),user.getUsername());
             model.addAttribute("info","update success");
         }else model.addAttribute("info","update failed");
         return "admin/user_edit";
