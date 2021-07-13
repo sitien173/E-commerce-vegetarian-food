@@ -43,7 +43,7 @@ modules
 
 ### Tools and Technologies:
 
-* **Technology** : Bootstrap, Java, Spring MVC, Hibernate, JSP, Maven.
+* **Technology** : Bootstrap, Java, Spring MVC, Spring Security, Spring JDBC, JSP, Maven.
 * **Application Servicer**: Apache Tomcat Server.
 * **Database** : SQL Server Database
 
