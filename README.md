@@ -1,4 +1,4 @@
-# ShoppingCart - An amazing website (http://demo-env.eba-kinybp2w.us-east-2.elasticbeanstalk.com/)
+# Ecommerce Website Vegetarian - An amazing website [Demo](http://demo-env.eba-kinybp2w.us-east-2.elasticbeanstalk.com/)
 
 
 We developed an end to end **Ecommerce web Application using Spring MVC** with multiple
